@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: db
+  namespace: matrix
+spec:
+  instances: 1
+  primaryUpdateStrategy: unsupervised
+
+  storage:
+    storageClass: openebs-hostpath
+    size: 1Gi

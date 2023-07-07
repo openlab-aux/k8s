@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dendrite
+spec:
+  destination:
+    namespace: matrix
+    server: "https://kubernetes.default.svc"
+  source:
+    path: manifests/dendrite
+    repoURL: "https://github.com/openlab-aux/k8s"
+    targetRevision: main
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dendrite
+  labels:
+    app: dendrite
+spec:
+  ports:
+    - port: 8008
+      name: foo
+    - port: 8448
+      name: bar
+  clusterIP: None
+  selector:
+    app: dendrite
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dendrite
+spec:
+  serviceName: "dendrite"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dendrite
+  template:
+    metadata:
+      labels:
+        app: dendrite
+    spec:
+      volumes:
+        - name: config
+          secret:
+            secretName: keys
+            optional: false
+      containers:
+        - name: dendrite
+          image: docker.io/matrixdotorg/dendrite-monolith:v0.13.0
+          ports:
+            - containerPort: 8008
+            - containerPort: 8448
+          volumeMounts:
+            - name: config
+              mountPath: /etc/dendrite
+            - name: media
+              mountPath: /var/dendrite/media
+            - name: jetstream
+              mountPath: /var/dendrite/jetstream
+            - name: searchindex
+              mountPath: /var/dendrite/searchindex
+  volumeClaimTemplates:
+    - metadata:
+        name: media
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: jetstream
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: searchindex
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

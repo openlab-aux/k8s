@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dendrite
+  annotations:
+    cert-manager.io/cluster-issuer: le-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - matrix.openlab-augsburg.de
+      secretName: ingress-cert-new
+  rules:
+    - host: matrix.openlab-augsburg.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dendrite
+                port:
+                  number: 8008
