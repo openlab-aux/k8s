@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+spec:
+  destination:
+    name: ""
+    namespace: keycloak
+    server: "https://kubernetes.default.svc"
+  source:
+    path: ""
+    repoURL: "https://codecentric.github.io/helm-charts"
+    targetRevision: 18.4.3
+    chart: keycloak
+    helm:
+      values: |
+        ingress:
+          annotations:
+            cert-manager.io/cluster-issuer: le-prod
+          enabled: true
+          ingressClassName: nginx
+          rules:
+            - host: keycloak.lab.weltraumpflege.org
+              paths:
+                - path: '/'
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - keycloak.lab.weltraumpflege.org
+              secretName: ingress-cert
+        postgresql:
+          enabled: false
+
+  sources: []
+  project: default
+  syncPolicy:
+    automated: null
