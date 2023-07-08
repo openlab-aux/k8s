@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flohmarkt
+  annotations:
+    cert-manager.io/cluster-issuer: le-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - flowmarkt.ola.lol
+      secretName: ingress-cert
+  rules:
+    - host: flowmarkt.ola.lol
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: flohmarkt-web
+                port:
+                  number: 8000
