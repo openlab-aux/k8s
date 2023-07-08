@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flohmarkt-web
+  labels:
+    app: flohmarkt-web
+spec:
+  ports:
+    - port: 8000
+      name: web
+  clusterIP: None
+  selector:
+    app: flohmarkt-web
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: flohmarkt-web
+spec:
+  serviceName: "flohmarkt-web"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flohmarkt-web
+  template:
+    metadata:
+      labels:
+        app: flohmarkt-web
+    spec:
+      volumes:
+        - name: flohmarkt-config
+          secret:
+            secretName: flohmarkt-config
+      containers:
+        - name: web
+          image: codeberg.org/waaaaargh/flohmarkt:latest
+          imagePullPolicy: Always
+          # command: ["/usr/bin/sleep", "3600"]
+          ports:
+            - containerPort: 8000
+              name: web
+          volumeMounts:
+            - name: flohmarkt-config
+              mountPath: /etc/flohmarkt
+            - name: flohmarkt-data
+              mountPath: /var/lib/flohmarkt
+          env:
+            - name: COUCHDB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: COUCHDB_USER
+            - name: COUCHDB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: COUCHDB_PASSWORD
+
+  volumeClaimTemplates:
+    - metadata:
+        name: flohmarkt-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
