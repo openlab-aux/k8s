@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak-dependencies
+spec:
+  destination:
+    namespace: keycloak
+    server: "https://kubernetes.default.svc"
+  source:
+    path: manifests/keycloak-dependencies
+    repoURL: "https://github.com/openlab-aux/k8s"
+    targetRevision: main
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -3,17 +3,30 @@ kind: Application
 metadata:
   name: keycloak
 spec:
+  project: "default"
   destination:
     namespace: keycloak
     server: "https://kubernetes.default.svc"
   source:
-    path: manifests/keycloak
-    repoURL: "https://github.com/openlab-aux/k8s"
-    targetRevision: main
-    directory:
-      recurse: true
-  sources: []
-  project: default
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: 15.1.6
+    chart: keycloak
+    helm:
+      values: |
+        ingress:
+          enabled: true
+          tls: true
+          ingressClassName: nginx
+          hostname: "keycloak.lab.weltraumpflege.org"
+          annotations:
+            cert-manager.io/cluster-issuer: le-prod
+           
+        postgresql:
+          enabled: false
+        externalDatabase:
+          existingSecret: "db-credentials"
+          existingSecretHostKey: "host"
+          existingSecretPortKey: "port"
+          existingSecretUserKey: "username"
+          existingSecretDatabaseKey: "db"
+          existingSecretPasswordKey: "password"

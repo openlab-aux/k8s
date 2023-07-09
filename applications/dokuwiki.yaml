@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dokuwiki
+spec:
+  project: "default"
+  destination:
+    namespace: dokuwiki
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: 14.1.4
+    chart: dokuwiki
+    helm:
+      values: |
+        persistence:
+          enabled: true
+          storageClass: openebs-hostpath
+
+        ingress:
+          enabled: true
+          hostname: wiki.lab.weltraumpflege.org
+          tls: true
+          ingressClassName: nginx
+          annotations:
+            cert-manager.io/cluster-issuer: le-prod
+          # extraHosts:
+          #   - wiki.openlab-augsburg.de
+
+        existing-secret: dokuwiki-admin-password
+
+        dokuwikiUsername: admin
+        dokuwikiEmail: vorstand@openlab-augsburg.de
+        dokuwikiFullName: Admin User
+        dokuwikiWikiName: OpenLab Augsburg
