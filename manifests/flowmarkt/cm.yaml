@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flohmarkt-config
+data:
+  FLOHMARKT_INSTANCE_NAME: "fl0wmarkt"
+  FLOHMARKT_DEBUG_MODE: "1"
+  FLOHMARKT_EXTERNAL_URL: "https://flowmarkt.ola.lol/"
+  FLOHMARKT_DB_SCHEME: "http"
+  FLOHMARKT_DB_USER: "flohmarkt"
+  FLOHMARKT_DB_HOST: "couchdb.flowmarkt.svc.cluster.local"
+  FLOHMARKT_DB_PORT: "5984"

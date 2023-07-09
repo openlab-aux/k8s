@@ -33,25 +33,41 @@ spec:
           secret:
             secretName: flohmarkt-config
       containers:
+        - name: background
+          image: codeberg.org/waaaaargh/flohmarkt:latest
+          command: ["/entrypoint.sh", "background"]
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: flohmarkt-data
+              mountPath: /var/lib/flohmarkt
+          envFrom:
+            - configMapRef:
+                name: flohmarkt-config
+            - secretRef:
+                name: flohmarkt-secrets
+          env:
+            - name: FLOHMARKT_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: COUCHDB_PASSWORD
         - name: web
           image: codeberg.org/waaaaargh/flohmarkt:latest
+          command: ["/entrypoint.sh", "web"]
           imagePullPolicy: Always
-          # command: ["/usr/bin/sleep", "3600"]
           ports:
             - containerPort: 8000
               name: web
           volumeMounts:
-            - name: flohmarkt-config
-              mountPath: /etc/flohmarkt
             - name: flohmarkt-data
               mountPath: /var/lib/flohmarkt
+          envFrom:
+            - configMapRef:
+                name: flohmarkt-config
+            - secretRef:
+                name: flohmarkt-secrets
           env:
-            - name: COUCHDB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: db-secrets
-                  key: COUCHDB_USER
-            - name: COUCHDB_PASSWORD
+            - name: FLOHMARKT_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: db-secrets
