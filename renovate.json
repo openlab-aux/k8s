@@ -4,6 +4,9 @@
     "config:base"
   ],
   "argocd": {
-    "fileMatch": ["applications/.+\\.yaml$", "manifests/.+\\.yaml$"]
+    "fileMatch": ["applications/.+\\.yaml$"]
+  },
+  "kubernetes": {
+    "fileMatch": ["manifests/.+/.+\\.yaml$"]
   }
 }
