@@ -35,6 +35,7 @@ spec:
         server:
           ingress:
             enabled: true
+            https: true
             ingressClassName: nginx
             annotations:
               cert-manager.io/cluster-issuer: le-prod
