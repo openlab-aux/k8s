@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+spec:
+  project: "default"
+  destination:
+    namespace: ingress-nginx
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://kubernetes.github.io/ingress-nginx"
+    targetRevision: 4.7.1
+    chart: ingress-nginx
+    helm:
+      values: |
+        controller:
+          service:
+            type: NodePort
+            nodePorts:
+              http: 32080
+              https: 32443
+              tcp:
+              8080: 32808
+
