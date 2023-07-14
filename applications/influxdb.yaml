@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: influx-lab
+spec:
+  project: "default"
+  destination:
+    namespace: influx-lab
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://helm.influxdata.com/"
+    targetRevision: 2.1.1
+    chart: influxdb2
+    helm:
+      values: |
+        image:
+          repository: influxdb
+        ingress:
+          annotations:
+            cert-manager.io/cluster-issuer: le-prod
+          className: nginx
+          enabled: true
+          hostname: influx.lab.weltraumpflege.org
+          secretName: influx-tls-prod
+          tls: true
+        persistence:
+          storageClass: openebs-hostpath
