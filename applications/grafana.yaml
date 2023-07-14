@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+spec:
+  project: "default"
+  destination:
+    namespace: grafana
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://grafana.github.io/helm-charts"
+    targetRevision: 6.58.0
+    chart: grafana
+    helm:
+      values: |
+        grafana.ini:
+          feature_toggles:
+            publicDashboards: true
+          server:
+            root_url: https://grafana.lab.weltraumpflege.org
+        ingress:
+          annotations:
+            cert-manager.io/cluster-issuer: le-prod
+          enabled: true
+          hosts:
+          - grafana.lab.weltraumpflege.org
+          ingressClassName: nginx
+          tls:
+          - hosts:
+            - grafana.lab.weltraumpflege.org
+            secretName: grafana-tls-prod
+        persistence:
+          enabled: true
+          storageClassName: openebs-hostpath
+        testFramework:
+          enabled: false
