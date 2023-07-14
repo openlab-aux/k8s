@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cnpg
+spec:
+  project: "default"
+  destination:
+    namespace: cnpg-system
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://cloudnative-pg.github.io/charts"
+    targetRevision: 0.18.1
+    chart: cloudnative-pg
