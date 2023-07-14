@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openebs
+spec:
+  project: "default"
+  destination:
+    namespace: openebs
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://openebs.github.io/charts"
+    targetRevision: 3.3.1
+    chart: openebs
+    helm:
+      values: |
+        localprovisioner:
+          basePath: "/storage/openebs/local"
+        snapshotOperator:
+          enabled: false
+        ndm:
+          enabled: false
+        ndmOperator:
+          enabled: false
