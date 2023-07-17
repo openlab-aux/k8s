@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8up
+spec:
+  project: "default"
+  destination:
+    namespace: k8up
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://k8up-io.github.io/k8up"
+    targetRevision: 4.3.0
+    chart: k8up
+    helm:
+      values: |
+        k8up:
+          envVars:
+            - name: BACKUP_GLOBALREPOPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: restic
+                  key: password
+            - name: BACKUP_GLOBALACCESSKEYID
+              valueFrom:
+                secretKeyRef:
+                  name: s3
+                  key: access_key_id
+            - name: BACKUP_GLOBALSECRETACCESSKEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3
+                  key: secret_access_key
+            - name: BACKUP_GLOBALS3BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: s3
+                  key: bucket
+            - name: BACKUP_GLOBALS3ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: s3
+                  key: endpoint
+ 
