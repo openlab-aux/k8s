@@ -25,6 +25,9 @@ spec:
       app: flohmarkt-web
   template:
     metadata:
+      annotations:
+        k8up.io/backupcommand: tar -C /var/lib/flohmarkt/ -cf /dev/stdout - ./
+        k8up.io/file-extension: .tar
       labels:
         app: flohmarkt-web
     spec:
