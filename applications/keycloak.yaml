@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://charts.bitnami.com/bitnami"
-    targetRevision: 15.1.7
+    targetRevision: 15.1.8
     chart: keycloak
     helm:
       values: |
