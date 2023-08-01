@@ -9,5 +9,5 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://grafana.github.io/helm-charts"
-    targetRevision: 2.9.10
+    targetRevision: 2.9.11
     chart: loki-stack
