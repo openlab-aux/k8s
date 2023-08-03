@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://charts.bitnami.com/bitnami"
-    targetRevision: 14.1.6
+    targetRevision: 14.1.7
     chart: dokuwiki
     helm:
       values: |
