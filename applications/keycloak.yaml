@@ -13,6 +13,7 @@ spec:
     chart: keycloak
     helm:
       values: |
+        proxy: edge
         ingress:
           enabled: true
           tls: true
