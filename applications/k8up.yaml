@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://k8up-io.github.io/k8up"
-    targetRevision: 4.4.0
+    targetRevision: 4.4.1
     chart: k8up
     helm:
       values: |
