@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://openebs.github.io/charts"
-    targetRevision: 3.8.0
+    targetRevision: 3.9.0
     chart: openebs
     helm:
       values: |
