@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mautrix-telegram 
+  labels:
+    app: mautrix-telegram
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: mautrix-telegram
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mautrix-telegram
+spec:
+  serviceName: mautrix-telegram
+  selector:
+    matchLabels:
+      app: mautrix-telegram # has to match .spec.template.metadata.labels
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mautrix-telegram
+    spec:
+      containers:
+      - name: mautrix-telegram
+        image: dock.mau.dev/mautrix/telegram:1fb8a7a0a50a6cb9c8de2d6dee829c7df9aec076-arm64
+        ports:
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "openebs-hostpath"
+      resources:
+        requests:
+          storage: 1Gi
