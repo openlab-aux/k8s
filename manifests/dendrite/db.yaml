@@ -6,7 +6,10 @@ metadata:
 spec:
   instances: 1
   primaryUpdateStrategy: unsupervised
-
+  inheritedMetadata:
+    annotations:
+      k8up.io/backupcommand: "pg_dump app"
+      k8up.io/backupcommand-container: postgres
   storage:
     storageClass: openebs-hostpath
     size: 1Gi
