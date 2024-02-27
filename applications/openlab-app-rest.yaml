@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openlab-app-rest
+spec:
+  destination:
+    namespace: openlab-app-rest
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: manifests
+    repoURL: 'https://github.com/openlab-aux/openlab-app-rest.git'
+    targetRevision: 'feat/k8s-manifests'
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
