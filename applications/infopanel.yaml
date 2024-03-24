@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infopanel
+spec:
+  destination:
+    namespace: infopanel
+    server: "https://kubernetes.default.svc"
+  source:
+    path: manifests/infopanel
+    repoURL: "https://github.com/openlab-aux/k8s"
+    targetRevision: main
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

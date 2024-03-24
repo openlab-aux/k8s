@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: infopanel
+  name: infopanel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infopanel
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: infopanel
+    spec:
+      containers:
+      - image: ghcr.io/openlab-aux/infopanel-client:latest
+        name: infopanel-client
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 256M
+            cpu: 256m
+          limits:
+            memory: 512M
+            cpu: 512m
