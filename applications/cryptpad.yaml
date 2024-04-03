@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cryptpad
+spec:
+  project: "default"
+  destination:
+    namespace: cryptpad
+    server: "https://kubernetes.default.svc"
+  sources:
+    - repoURL: "oci://ghcr.io/cryptpad/helm/cryptpad"
+      targetRevision: 0.0.19
+      helm:
+        values: |
+          ingress:
+            enabled: true
+            className: nginx
+            annotations: {}
+            hosts:
+            - host: cryptpad.lab.weltraumpflege.org
+            - host: ola.lol
+            tls:
+            - secretName: cryptpad-tls
+    - path: manifests/cryptpad
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
+ 
