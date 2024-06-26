@@ -17,14 +17,14 @@ spec:
             enabled: true
             className: nginx
             annotations:
-              cert-manager.io/cluster-issuer: le-staging
+              cert-manager.io/cluster-issuer: le-prod
             hosts:
             - host: xwiki.lab.weltraumpflege.org
               paths:
                 - path: /
                   pathType: Prefix
             tls:
-            - secretName: xwiki-tls
+            - secretName: xwiki-tls-prod
               hosts:
                 - xwiki.lab.weltraumpflege.org
           mysql:
