@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+spec:
+  project: "default"
+  destination:
+    namespace: minio
+    server: "https://kubernetes.default.svc"
+  sources:
+    - repoURL: "https://operator.min.io"
+      targetRevision: 6.0.1
+      chart: operator
+      helm:
+        values: |
+          operator:
+            replicaCount: 1
+    - repoURL: "https://operator.min.io"
+      targetRevision: 6.0.1
+      chart: tenant
+      helm:
+        values: |
+          ingress:
+            api:
+              enabled: true
+              ingressClassName: nginx
+              host: minio.lab.weltraumpflege.org
+              annotations:
+                cert-manager.io/cluster-issuer: le-prod
+                nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+                nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+                nginx.ingress.kubernetes.io/rewrite-target: /
+                nginx.ingress.kubernetes.io/proxy-body-size: "0"
+                nginx.ingress.kubernetes.io/server-snippet: |
+                  client_max_body_size 0;
+                nginx.ingress.kubernetes.io/configuration-snippet: |
+                  chunked_transfer_encoding off;
+              tls:
+                - hosts:
+                    - minio.lab.weltraumpflege.org
+                  secretName: minio-api-cert
+            console:
+              enabled: true
+              ingressClassname: nginx
+              host: console.minio.lab.weltraumpflege.org
+              annotations:
+                cert-manager.io/cluster-issuer: le-prod
+                nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+                nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+                nginx.ingress.kubernetes.io/rewrite-target: /
+                nginx.ingress.kubernetes.io/proxy-body-size: "0"
+                nginx.ingress.kubernetes.io/server-snippet: |
+                  client_max_body_size 0;
+                nginx.ingress.kubernetes.io/configuration-snippet: |
+                  chunked_transfer_encoding off;
+
+              tls:
+                - hosts:
+                    - console.minio.lab.weltraumpflege.org
+                  secretName: minio-console-cert
+              
+
+          tenant:
+            name: openlab
+
+            features:
+              enableSFTP: true
+
+            configuration:
+              name: openlab-tenant-secret
+
+            pools:
+              - servers: 1
+                name: pool-0
+                volumesPerServer: 1
+                size: 50Gi
+                storageClassName: openebs-hostpath
