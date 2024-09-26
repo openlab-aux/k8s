@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: taler-exchange
+  name: taler-exchange
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taler-exchange
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: taler-exchange
+    spec:
+      containers:
+        - image: ghcr.io/y0ngg4n/taler-exchange-docker:main
+          name: taler-exchange
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: "/etc/taler/taler.conf"
+              name: taler.conf
+              readOnly: true
+            - mountPath: "/etc/taler/secrets/exchange-db.secret.conf"
+              name: exchange-db.secret.conf
+              readOnly: true
+        - image: postgres
+          name: postgres
+          ports:
+            - containerPort: 5432
+         environment:
+           - name: POSTGRES_PASSWORD
+             value: nnqhiqukt8atvpzpdlvpenupq9fyihmrd7uudijixcv5yu3hlx
+           - name: POSTGRES_USER
+             value: taler
+           - name: POSTGRES_DB
+             value: taler
+      volumes:
+        - name: taler-conf
+          secret: taler
+            secretName: taler.conf
+
+        - name: db-conf
+          secret: taler
+            secretName: exchange-db.secret.conf
