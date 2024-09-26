@@ -6,6 +6,7 @@ metadata:
   name: taler-exchange
 spec:
   replicas: 1
+  revisionHistoryLimig: 1
   selector:
     matchLabels:
       app: taler-exchange
