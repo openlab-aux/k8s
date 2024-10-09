@@ -23,10 +23,10 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: "/etc/taler/taler.conf"
-              name: taler.conf
+              name: taler-conf
               readOnly: true
             - mountPath: "/etc/taler/secrets/exchange-db.secret.conf"
-              name: exchange-db.secret.conf
+              name: db-conf
               readOnly: true
       volumes:
         - name: taler-conf
