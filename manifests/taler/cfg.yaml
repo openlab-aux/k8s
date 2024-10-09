@@ -1,9 +1,9 @@
 apiVersion: v1
-kind: StringSecret
+kind: Secret
 metadata:
     name: taler
     namespace: taler
-data:
+stringData:
     taler.conf: |-
         # Main entry point for the GNU Taler configuration.
         #
