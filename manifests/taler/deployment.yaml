@@ -28,17 +28,6 @@ spec:
             - mountPath: "/etc/taler/secrets/exchange-db.secret.conf"
               name: exchange-db.secret.conf
               readOnly: true
-        - image: postgres
-          name: postgres
-          ports:
-            - containerPort: 5432
-         environment:
-           - name: POSTGRES_PASSWORD
-             value: nnqhiqukt8atvpzpdlvpenupq9fyihmrd7uudijixcv5yu3hlx
-           - name: POSTGRES_USER
-             value: taler
-           - name: POSTGRES_DB
-             value: taler
       volumes:
         - name: taler-conf
           secret: taler
