@@ -30,9 +30,9 @@ spec:
               readOnly: true
       volumes:
         - name: taler-conf
-          secret: taler
-            secretName: taler.conf
+          secret:
+            secretName: taler 
 
         - name: db-conf
-          secret: taler
-            secretName: exchange-db.secret.conf
+          secret:
+            secretName: db-conf
