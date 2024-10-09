@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wikijs
+spec:
+  project: "default"
+  destination:
+    namespace: wikijs
+    server: "https://kubernetes.default.svc"
+  sources:
+    - path: manifests/wikijs
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
+    - repoURL: "https://charts.js.wiki"
+      chart: wiki
+      targetRevision: 2.2.21
+      helm:
+        values: |
+          postgresql:
+            postgresqlUser: app
+            postgresqlDatabase: app
+            postgresqlHost: db-rw.wikijs.svc.cluster.local
+            existingSecret: db-app
+            existingSecretKey: password
+            enabled: false
+          ingress:
+            className: nginx
+            enabled: true
+            hosts:
+              - host: wikijs.lab.weltraumpflege.org
+                paths:
+                  - path: "/"
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - wikijs.lab.weltraumpflege.org 
+                secretName: wiki.lab.weltraumpflege.org
