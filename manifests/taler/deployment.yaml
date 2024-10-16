@@ -31,8 +31,8 @@ spec:
       volumes:
         - name: taler-conf
           secret:
-            secretName: taler 
+            secretName: taler
 
         - name: db-conf
           secret:
-            secretName: db-conf
+            secretName: taler
