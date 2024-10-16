@@ -16,7 +16,7 @@ spec:
         app: taler-exchange
     spec:
       containers:
-        - image: ghcr.io/y0ngg4n/taler-exchange-docker:main
+        - image: docker.io/yonggan/taler-exchange
           name: taler-exchange
           ports:
             - containerPort: 80
