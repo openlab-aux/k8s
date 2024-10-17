@@ -29,6 +29,3 @@ spec:
         - name: taler-conf
           secret:
             secretName: taler
-        - name: caddy-conf
-          secret:
-            secretName: taler-caddy
