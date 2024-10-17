@@ -46,7 +46,7 @@ stringData:
         # systems is always rounded to this unit.
         CURRENCY_ROUND_UNIT = EUR:0.01
 
-        [coin_MATE_FNORDS_10_0]
+        [coin_MATE_FNORD_10_0]
         VALUE = EUR:0.10
         DURATION_WITHDRAW = 1000 years
         DURATION_SPEND = 1000 years
