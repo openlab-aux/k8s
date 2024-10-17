@@ -28,6 +28,7 @@ stringData:
 
     [exchange]
     MASTER_PUBLIC_KEY = JXT53Y71QFTGHC335ZA12RGXQEBF0N0SDTGJ0Y15HM1WBZ0WTHE0
+    DB = postgres
 
     [taler]
 
@@ -52,21 +53,10 @@ stringData:
     TALER_DATA_HOME = /var/lib/taler/
 
 
+    [exchangedb-postgres]
+    CONFIG=postgres://taler:nnqhiqukt8atvpzpdlvpenupq9fyihmrd7uudijixcv5yu3hlx@db-rw.taler/taler
     # Inline configurations from all Taler components.
     # @inline-matching@ conf.d/*.conf
 
     # Overrides from tools that help with configuration.
     # @inline@ overrides.conf
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: taler-db
-  namespace: taler
-stringData:
-  exchange-db.secret.conf: |-
-    [exchange]
-    DB = postgres
-
-    [exchangedb-postgres]
-    CONFIG=postgres://taler:nnqhiqukt8atvpzpdlvpenupq9fyihmrd7uudijixcv5yu3hlx@db-rw.taler/taler
