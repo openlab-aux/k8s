@@ -53,10 +53,10 @@ stringData:
 
 
     # Inline configurations from all Taler components.
-    @inline-matching@ conf.d/*.conf
+    # @inline-matching@ conf.d/*.conf
 
     # Overrides from tools that help with configuration.
-    @inline@ overrides.conf
+    # @inline@ overrides.conf
 ---
 apiVersion: v1
 kind: Secret
