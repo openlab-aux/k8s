@@ -22,10 +22,10 @@ spec:
             - containerPort: 80
           imagePullPolicy: Always
           volumeMounts:
-            - mountPath: "/etc/taler/taler.conf"
+            - mountPath: "/etc/taler"
               name: taler-conf
               readOnly: true
-            - mountPath: "/etc/taler/secrets/exchange-db.secret.conf"
+            - mountPath: "/etc/taler/secrets"
               name: db-conf
               readOnly: true
       volumes:
