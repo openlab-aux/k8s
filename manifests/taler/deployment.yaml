@@ -19,7 +19,7 @@ spec:
         - image: docker.io/yonggan/taler-exchange
           name: taler-exchange
           ports:
-            - containerPort: 80
+            - containerPort: 8081
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: "/etc/taler"
