@@ -8,10 +8,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - taler-exchange.lab.weltraumpflege.org
+        - taler-exchange.openlab-augsburg.de
       secretName: ingress-cert
   rules:
-    - host: taler-exchange.lab.weltraumpflege.org
+    - host: taler-exchange.openlab-augsburg.de
       http:
         paths:
           - path: /
