@@ -25,14 +25,7 @@ spec:
             - mountPath: "/etc/taler"
               name: taler-conf
               readOnly: true
-            - mountPath: "/etc/taler/secrets"
-              name: db-conf
-              readOnly: true
       volumes:
         - name: taler-conf
           secret:
             secretName: taler
-
-        - name: db-conf
-          secret:
-            secretName: taler-db
