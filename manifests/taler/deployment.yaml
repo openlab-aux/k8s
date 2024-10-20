@@ -16,7 +16,11 @@ spec:
         app: taler-exchange
     spec:
       containers:
+<<<<<<< HEAD
         - image: docker.io/yonggan/taler-exchange
+=======
+        - image: docker.io/y0ngg4n/taler-exchange-docker
+>>>>>>> a6c443d (Fix doker)
           name: taler-exchange
           ports:
             - containerPort: 80
