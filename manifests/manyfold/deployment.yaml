@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: manyfold
+  name: manyfold
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: manyfold
+  template:
+    metadata:
+      labels:
+        app: manyfold
+    spec:
+      containers:
+        - image: ghcr.io/manyfold3d/manyfold
+          name: manyfold
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - mountPath: "/libraries"
+              name: manyfold-libraries
+          environment:
+            - name: DATABASE_ADAPTER
+              value: postgresql # mysql2 or sqlite3 are also supported
+            - name: DATABASE_HOST
+              value: db-rw.manyfold
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: dbname
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: pgpass
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: password
+            - name: REDIS_URL
+              value: redis://redis-server:6379/1
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+      volumes:
+        - name: manyfold-libraries

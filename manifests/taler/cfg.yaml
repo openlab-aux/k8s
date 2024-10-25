@@ -35,8 +35,8 @@ stringData:
 
         # Monthly amount that mandatorily triggers an AML check
         AML_THRESHOLD = EUR:250
-        [taler]
 
+        [taler]
         # Currency of the Taler deployment.  This setting applies to all Taler
         # components that only support a single currency.
         CURRENCY = EUR
@@ -74,3 +74,36 @@ stringData:
 
         # Overrides from tools that help with configuration.
         # @inline@ overrides.conf
+        #
+        [exchange-account-1]
+        # Account identifier in the form of an RFC-8905 payto:// URI.
+        # For SEPA, looks like payto://iban/$IBAN?receiver-name=$NAME
+        # Make sure to URL-encode spaces in $NAME!
+        #
+        # With x-taler-bank (for Fakebank)
+        # PAYTO_URI = "payto://x-taler-bank/bank.demo.taler.net/Exchange?receiver-name=openlab"
+        #
+        # Example using IBAN (for use with LibEuFin)
+        # PAYTO_URI = "payto://iban/DE4919267725037?receiver=name=exchange"
+        PAYTO_URI = "payto://iban/DE159593?receiver-name=Sandcastle+Echange+Inc"
+        # URL for talking to the bank wire the wire API.
+        WIRE_GATEWAY_URL = https://bank.demo.taler.net/accounts/exchange/taler-wire-gateway/
+        # Use for exchange-aggregator (outgoing transfers)
+        ENABLE_DEBIT = YES
+        # Use for exchange-wirewatch (and listed in /wire)
+        ENABLE_CREDIT = YES
+
+
+        [exchange-accountcredentials-1]
+
+        # LibEuFin expects basic auth.
+        WIRE_GATEWAY_AUTH_METHOD = basic
+
+        # Username and password to access the Taler wire gateway.
+        USERNAME = exchange
+        PASSWORD = sandbox
+
+        # Base URL of the Taler wire gateway.
+        WIRE_GATEWAY_URL = https://bank.demo.taler.net/accounts/exchange/taler-wire-gateway/
+
+
