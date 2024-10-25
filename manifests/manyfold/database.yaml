@@ -7,4 +7,4 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     storageClass: openebs-hostpath
-    size: 1Gi
+    size: 2Gi
