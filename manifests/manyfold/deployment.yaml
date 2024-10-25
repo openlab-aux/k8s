@@ -24,6 +24,10 @@ spec:
             - mountPath: "/libraries"
               name: manyfold-libraries
           environment:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
             - name: DATABASE_ADAPTER
               value: postgresql # mysql2 or sqlite3 are also supported
             - name: DATABASE_HOST
@@ -50,9 +54,5 @@ spec:
                   key: password
             - name: REDIS_URL
               value: redis://redis-server:6379/1
-            - name: PUID
-              value: "1000"
-            - name: PGID
-              value: "1000"
       volumes:
         - name: manyfold-libraries
