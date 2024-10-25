@@ -19,7 +19,7 @@ spec:
         - image: ghcr.io/manyfold3d/manyfold
           name: manyfold
           ports:
-            - containerPort: 8081
+            - containerPort: 3214
           volumeMounts:
             - mountPath: "/libraries"
               name: manyfold-libraries
