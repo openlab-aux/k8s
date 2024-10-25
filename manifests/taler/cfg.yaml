@@ -105,5 +105,3 @@ stringData:
 
         # Base URL of the Taler wire gateway.
         WIRE_GATEWAY_URL = https://bank.demo.taler.net/accounts/exchange/taler-wire-gateway/
-
-
