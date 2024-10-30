@@ -6,18 +6,16 @@ spec:
   destination:
     namespace: manyfold
     server: "https://kubernetes.default.svc"
-  source:
-    path: manifests/manyfold
-    repoURL: "https://github.com/openlab-aux/k8s"
-    targetRevision: main
-    directory:
-      recurse: true
   sources:
     - chart: redis
       repoURL: https://bitnami-labs.github.io/redis
       helm:
         releaseName: redis
-
+    - path: manifests/manyfold
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
   project: default
   syncPolicy:
     syncOptions:
