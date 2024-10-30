@@ -9,6 +9,7 @@ spec:
   sources:
     - chart: redis
       repoURL: https://bitnami-labs.github.io/redis
+      targetRevision: 20.2.1
       helm:
         releaseName: redis
     - path: manifests/manyfold
