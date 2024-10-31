@@ -54,5 +54,7 @@ spec:
                   key: password
             - name: REDIS_URL
               value: redis://default:A36B6jX4BG/@redis-master:6379/1
+            - name: MULTIUSER
+              value: "enabled"
       volumes:
         - name: manyfold-libraries
