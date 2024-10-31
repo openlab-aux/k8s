@@ -46,7 +46,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: db-app
-                  key: pgpass
+                  key: password
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
@@ -58,5 +58,7 @@ spec:
               value: "enabled"
             - name: FEDERATION
               value: "enabled"
+            - name: SITE_NAME
+              value: "Openlab Augsburgs Manfold"
       volumes:
         - name: manyfold-libraries
