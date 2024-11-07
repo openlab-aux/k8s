@@ -62,3 +62,5 @@ spec:
               value: "Openlab Augsburgs Manfold"
       volumes:
         - name: manyfold-libraries
+          storageClassName: "openebs-hostpath"
+
