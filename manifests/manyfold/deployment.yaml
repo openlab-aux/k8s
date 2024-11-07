@@ -60,7 +60,12 @@ spec:
               value: "enabled"
             - name: SITE_NAME
               value: "Openlab Augsburgs Manfold"
-      volumes:
-        - name: manyfold-libraries
-          storageClassName: "openebs-hostpath"
 
+      volumeClaimTemplates:
+        - metadata:
+            name: manyfold-libraries
+          spec:
+            accessModes: ["ReadWriteMany"]
+            resources:
+              requests:
+                storage: 1Gi
