@@ -8,7 +8,11 @@ spec:
     server: "https://kubernetes.default.svc"
   sources:
     - chart: redis
+<<<<<<< HEAD
       repoURL: https://charts.bitnami.com/bitnami/
+=======
+      repoURL: "https://charts.bitnami.com/bitnami/"
+>>>>>>> k8s/main
       targetRevision: 20.2.1
       helm:
         releaseName: redis
