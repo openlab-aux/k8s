@@ -60,7 +60,7 @@ spec:
             - name: FEDERATION
               value: "enabled"
             - name: SITE_NAME
-              value: "Openlab Augsburgs Manfold"
+              value: "Openlab Augsburgs Manyfold"
 
   volumeClaimTemplates:
     - metadata:
