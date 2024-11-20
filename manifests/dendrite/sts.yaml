@@ -36,7 +36,7 @@ spec:
             optional: false
       containers:
         - name: dendrite
-          image: docker.io/matrixdotorg/dendrite-monolith:v0.13.7
+          image: docker.io/matrixdotorg/dendrite-monolith:v0.13.8
           ports:
             - containerPort: 8008
             - containerPort: 8448
