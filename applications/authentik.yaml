@@ -1,0 +1,116 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: authentik
+spec:
+  project: "default"
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+  destination:
+    namespace: authentik
+    server: "https://kubernetes.default.svc"
+  sources:
+    - path: manifests/authentik
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
+  
+    - repoURL: "https://charts.goauthentik.io"
+      targetRevision: 2024.10.4
+      chart: "authentik"
+      helm:
+        values: |
+          worker:
+            envFrom:
+              - secretRef:
+                  name: smtp-credentials
+            env:
+              - name: AUTHENTIK_SECRET_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: authentik-secret-key
+                    key: secret_key
+              - name: AUTHENTIK_POSTGRESQL__USER
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: user
+              - name: AUTHENTIK_POSTGRESQL__PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: password
+              - name: AUTHENTIK_POSTGRESQL__HOST
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: host
+              - name: AUTHENTIK_POSTGRESQL__NAME
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: dbname
+              - name: AUTHENTIK_POSTGRESQL__PORT
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: port
+
+          redis:
+            enabled: true
+
+          server:
+            volumes:
+              - name: media
+                persistentVolumeClaim:
+                  claimName: media
+            volumeMounts:
+              - mountPath: "/media"
+                name: media
+            ingress:
+              enabled: true
+              hosts:
+                - auth.openlab-augsburg.de
+              tls:
+                - secretName: authentik-tls
+                  hosts:
+                    - auth.openlab-augsburg.de
+              annotations:
+                cert-manager.io/cluster-issuer: le-prod
+            env:
+              - name: AUTHENTIK_SECRET_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: authentik-secret-key
+                    key: secret_key
+              - name: AUTHENTIK_POSTGRESQL__USER
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: user
+              - name: AUTHENTIK_POSTGRESQL__PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: password
+              - name: AUTHENTIK_POSTGRESQL__HOST
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: host
+              - name: AUTHENTIK_POSTGRESQL__NAME
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: dbname
+              - name: AUTHENTIK_POSTGRESQL__PORT
+                valueFrom:
+                  secretKeyRef:
+                    name: db-app
+                    key: port
+            envFrom:
+              - secretRef:
+                  name: smtp-credentials
