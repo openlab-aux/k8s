@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   sources:
     - repoURL: "https://operator.min.io"
-      targetRevision: 6.0.3
+      targetRevision: 6.0.4
       chart: operator
       helm:
         values: |
