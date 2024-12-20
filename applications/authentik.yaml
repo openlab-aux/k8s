@@ -19,7 +19,7 @@ spec:
         recurse: true
   
     - repoURL: "https://charts.goauthentik.io"
-      targetRevision: 2024.10.5
+      targetRevision: 2024.12.0
       chart: "authentik"
       helm:
         values: |
