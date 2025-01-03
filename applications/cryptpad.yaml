@@ -13,16 +13,27 @@ spec:
       targetRevision: 0.0.20
       helm:
         values: |
+          persistence:
+            cryptpad:
+              blob:
+                size: 5Gi
+              block:
+                size: 5Gi
+              data:
+                size: 5Gi
+              datastore:
+                size: 5Gi  
           ingress:
             enabled: true
             className: nginx
             annotations:
-              cert-manager.io/cluster-issuer: le-staging
+              cert-manager.io/cluster-issuer: le-prod
             hosts:
-            - host: cryptpad.lab.weltraumpflege.org
             - host: ola.lol
             tls:
-            - secretName: cryptpad-tls
+            - secretName: cryptpad-tls-ola-lol
+              hosts:
+                - ola.lol
     - path: manifests/cryptpad
       repoURL: "https://github.com/openlab-aux/k8s"
       targetRevision: main
