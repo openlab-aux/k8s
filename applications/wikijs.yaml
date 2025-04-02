@@ -29,11 +29,11 @@ spec:
             className: nginx
             enabled: true
             hosts:
-              - host: wikijs.lab.weltraumpflege.org
+              - host: wiki.openlab-augsburg.de
                 paths:
                   - path: "/"
                     pathType: Prefix
             tls:
               - hosts:
-                  - wikijs.lab.weltraumpflege.org 
-                secretName: wiki.lab.weltraumpflege.org
+                  - wiki.openlab-augsburg.de
+                secretName: wiki.openlab-augsburg.de
