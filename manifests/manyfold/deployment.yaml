@@ -23,7 +23,7 @@ spec:
           volumeMounts:
             - mountPath: "/libraries"
               name: manyfold-libraries
-          environment:
+          env:
             - name: PUID
               value: "1000"
             - name: PGID
