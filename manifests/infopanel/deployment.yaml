@@ -19,7 +19,7 @@ spec:
       - image: ghcr.io/openlab-aux/infopanel-client:latest
         name: infopanel-client
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         imagePullPolicy: Always
         resources:
           requests:
