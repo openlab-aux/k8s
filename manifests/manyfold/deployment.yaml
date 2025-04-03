@@ -61,6 +61,12 @@ spec:
               value: "enabled"
             - name: SITE_NAME
               value: "Openlab Augsburgs Manyfold"
+            - name: PUBLIC_HOSTNAME
+              value: "manyfold.openlab-augsburg.de"
+            - name: PUBLIC_PORT
+              value: "443"
+            - name: HTTPS_ONLY
+              value: "enabled"
 
   volumeClaimTemplates:
     - metadata:
