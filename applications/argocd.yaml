@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://argoproj.github.io/argo-helm"
-    targetRevision: 7.5.2
+    targetRevision: 7.8.21
     chart: argo-cd
     helm:
       values: |
@@ -24,7 +24,7 @@ spec:
 
           rbac:
             policy.csv: |
-              g, argocd-admin, role:admin
+              g, ArgoCD Admins, role:admin
 
         dex:
           enabled: false
@@ -39,11 +39,8 @@ spec:
             ingressClassName: nginx
             annotations:
               cert-manager.io/cluster-issuer: le-prod
-            host: argocd.lab.weltraumpflege.org
-            tls:
-              - hosts:
-                  - argocd.lab.weltraumpflege.org
-                secretName: argocd-tls
+            hostname: argocd.lab.weltraumpflege.org
+            tls: true
         redis-ha:
           enabled: false
 

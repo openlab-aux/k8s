@@ -19,10 +19,19 @@ spec:
         recurse: true
   
     - repoURL: "https://charts.goauthentik.io"
-      targetRevision: 2024.10.4
+      targetRevision: 2025.2.3
       chart: "authentik"
       helm:
         values: |
+          global:
+            volumes:
+              - name: templates
+                configMap:
+                  name: templates
+            volumeMounts:
+              - name: templates
+                mountPath: /templates
+
           worker:
             envFrom:
               - secretRef:
