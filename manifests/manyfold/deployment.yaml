@@ -1,11 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: manyfold
   name: manyfold
 spec:
-  replicas: 1
   revisionHistoryLimit: 1
   selector:
     matchLabels:
@@ -46,13 +45,34 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: db-app
-                  key: pgpass
+                  key: password
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
                   name: db-app
                   key: password
             - name: REDIS_URL
-              value: redis://redis-master:6379/1
-      volumes:
-        - name: manyfold-libraries
+              value: redis://default:A36B6jX4BG@redis-master:6379/1
+            - name: MULTIUSER
+              value: "enabled"
+            - name: REGISTRATION
+              value: "enabled"
+            - name: FEDERATION
+              value: "enabled"
+            - name: SITE_NAME
+              value: "Openlab Augsburgs Manyfold"
+            - name: PUBLIC_HOSTNAME
+              value: "manyfold.openlab-augsburg.de"
+            - name: PUBLIC_PORT
+              value: "443"
+            - name: HTTPS_ONLY
+              value: "enabled"
+
+  volumeClaimTemplates:
+    - metadata:
+        name: manyfold-libraries
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
