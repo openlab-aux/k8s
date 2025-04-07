@@ -15,7 +15,7 @@ spec:
         recurse: true
     - repoURL: "https://charts.js.wiki"
       chart: wiki
-      targetRevision: 2.2.22
+      targetRevision: 2.2.23
       helm:
         values: |
           postgresql:
