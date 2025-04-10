@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: directus
+  labels:
+    app: directus
+  annotations:
+    cert-manager.io/cluster-issuer: "le-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: 32m
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - directus.lab.weltraumpflege.org
+    secretName: directus-tls
+  rules:
+  - host: directus.lab.weltraumpflege.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: directus
+            port:
+              name: http

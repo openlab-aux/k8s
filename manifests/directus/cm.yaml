@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: directus
+  labels:
+    app: directus
+data:
+  DB_CLIENT: "pg"
+  DB_HOST: "db-rw"
+  DB_PORT: "5432"
+  DB_DATABASE: "app"
+  FILES_MAX_UPLOAD_SIZE: "32mb"
+  AUTH_PROVIDERS: "authentik"
+  AUTH_DISABLE_DEFAULT: "true"
+  AUTH_AUTHENTIK_DRIVER: openid
+  AUTH_AUTHENTIK_MODE: "session"
+  AUTH_AUTHENTIK_SYNC_USER_INFO: "true"
+  AUTH_AUTHENTIK_ISSUER_URL: "https://auth.openlab-augsburg.de/application/o/directus/.well-known/openid-configuration"
+  AUTH_AUTHENTIK_ALLOW_PUBLIC_REGISTRATION: "true"
+  AUTH_AUTHENTIK_REDIRECT_ALLOW_LIST: "https://directus.log.weltraumpflege.org/admin/login"
+  AUTH_AUTHENTIK_ROLE_MAPPING: |
+    json: {
+      "Directus Admins": "6e77786a-69c8-4f64-b4c7-990b5ba5c4ef",
+      "Public Relations": "0441017d-2e87-4368-91db-22ee536096e2"
+    }
+  EXTENSIONS_LOCATION: local
+  EXTENSIONS_PATH: "./extensions"
+  EXTENSIONS_MUST_LOAD: "true"
+  EXTENSIONS_AUTO_RELOAD: "true"

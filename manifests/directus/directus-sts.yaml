@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: directus
+  labels:
+    app: directus
+spec:
+  serviceName: directus
+  replicas: 1
+  selector:
+    matchLabels:
+      app: directus
+  template:
+    metadata:
+      labels:
+        app: directus
+    spec:
+      containers:
+      - name: directus
+        image: directus/directus:latest
+        ports:
+        - containerPort: 8055
+          name: http
+        envFrom:
+        - configMapRef:
+            name: directus
+        - secretRef:
+            name: sso-credentials
+        env:
+        - name: DB_PROVIDER
+          value: "pg"
+        - name: DB_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: db-app
+              key: uri
+        - name: PUBLIC_URL
+          value: "https://directus.lab.weltraumpflege.org"
+        - name: STORAGE_LOCATIONS
+          value: local
+        - name: STORAGE_LOCAL_ROOT
+          value: /storage
+        volumeMounts:
+        - name: storage
+          mountPath: /storage
+        - name: extensions
+          mountPath: /extensions
+
+  volumeClaimTemplates:
+  - metadata:
+      name: extensions
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "openebs-hostpath"
+      resources:
+        requests:
+          storage: 10Gi
+  - metadata:
+      name: storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "openebs-hostpath"
+      resources:
+        requests:
+          storage: 10Gi
