@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: infopanel
-  name: infopanel
+    app: infopanel2
+  name: infopanel2
 spec:
   replicas: 1
   selector:
@@ -16,11 +16,15 @@ spec:
         app: infopanel
     spec:
       containers:
-      - image: ghcr.io/openlab-aux/infopanel-client:latest
+      - image: ghcr.io/openlab-aux/infopanel2:main
         name: infopanel-client
         ports:
-        - containerPort: 80
+        - containerPort: 4321
+          name: http
         imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: directus-credentials
         resources:
           requests:
             memory: 256M

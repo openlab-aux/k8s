@@ -1,25 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: infopanel
+  name: infopanel2
   annotations:
     cert-manager.io/cluster-issuer: le-prod
 spec:
   ingressClassName: nginx
   rules:
-    - host: "infopanel.lab.weltraumpflege.org"
+    - host: "infopanel2.lab.weltraumpflege.org"
       http:
         paths:
           - path: /
             backend:
               service:
-                name: infopanel
+                name: infopanel2
                 port:
                   name: web
             pathType: Prefix
-  
   tls:
     - hosts:
-      - "infopanel.lab.weltraumpflege.org"
+      - "infopanel2.lab.weltraumpflege.org"
       secretName: ingress-cert
 
