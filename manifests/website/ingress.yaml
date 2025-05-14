@@ -17,7 +17,18 @@ spec:
                 port:
                   name: web
             pathType: Prefix
+    - host: "www.openlab-augsburg.de"
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: website
+                port:
+                  name: web
+            pathType: Prefix
   tls:
     - hosts:
         - "openlab-augsburg.de"
+        - "www.openlab-augsburg.de"
       secretName: ingress-cert
