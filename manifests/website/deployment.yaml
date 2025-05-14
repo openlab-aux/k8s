@@ -20,7 +20,6 @@ spec:
           name: website
           ports:
             - containerPort: 80
-          imagePullPolicy: Always
         imagePullPolicy: Always
         resources:
           requests:
