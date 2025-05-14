@@ -19,7 +19,7 @@ data:
   AUTH_AUTHENTIK_ALLOW_PUBLIC_REGISTRATION: "true"
   AUTH_AUTHENTIK_REDIRECT_ALLOW_LIST: "https://directus.log.weltraumpflege.org/admin/login"
   AUTH_AUTHENTIK_ROLE_MAPPING: |
-    json: {
+    {
       "Directus Admins": "6e77786a-69c8-4f64-b4c7-990b5ba5c4ef",
       "Public Relations": "0441017d-2e87-4368-91db-22ee536096e2"
     }
