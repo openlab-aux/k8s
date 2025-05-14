@@ -7,9 +7,9 @@ metadata:
 spec:
   ports:
     - name: web
-      port: 4231
+      port: 4321
       protocol: TCP
-      targetPort: 4231
+      targetPort: 4321
   selector:
     app: website
   type: ClusterIP
