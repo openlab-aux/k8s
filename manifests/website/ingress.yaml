@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: website
+  annotations:
+    cert-manager.io/cluster-issuer: le-prod
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "openlab-augsburg.de"
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: website
+                port:
+                  name: web
+            pathType: Prefix
+  tls:
+    - hosts:
+        - "openlab-augsburg.de"
+      secretName: ingress-cert
