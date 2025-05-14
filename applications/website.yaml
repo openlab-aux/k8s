@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mobilizon
+  name: website
 spec:
   destination:
-    namespace: mobilizon
+    namespace: website
     server: "https://kubernetes.default.svc"
   source:
-    path: manifests/mobilizon
+    path: manifests/website
     repoURL: "https://github.com/openlab-aux/k8s"
     targetRevision: main
     directory:
