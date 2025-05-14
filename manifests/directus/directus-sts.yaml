@@ -35,7 +35,7 @@ spec:
               name: db-app
               key: uri
         - name: PUBLIC_URL
-          value: "https://directus.lab.weltraumpflege.org"
+          value: "https://cms.openlab-augsburg.de"
         - name: STORAGE_LOCATIONS
           value: local
         - name: STORAGE_LOCAL_ROOT

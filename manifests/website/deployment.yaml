@@ -23,7 +23,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: DIRECTUS_URL
-              value: "https://directus.lab.weltraumpflege.org"
+              value: "https://cms.openlab-augsburg.de"
           resources:
             requests:
               memory: 256M

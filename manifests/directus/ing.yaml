@@ -10,17 +10,17 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - directus.lab.weltraumpflege.org
-    secretName: directus-tls
+    - hosts:
+        - cms.openlab-augsburg.de
+      secretName: directus-tls
   rules:
-  - host: directus.lab.weltraumpflege.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: directus
-            port:
-              name: http
+    - host: cms.openlab-augsburg.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: directus
+                port:
+                  name: http

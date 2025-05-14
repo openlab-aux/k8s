@@ -17,7 +17,7 @@ data:
   AUTH_AUTHENTIK_SYNC_USER_INFO: "true"
   AUTH_AUTHENTIK_ISSUER_URL: "https://auth.openlab-augsburg.de/application/o/directus/.well-known/openid-configuration"
   AUTH_AUTHENTIK_ALLOW_PUBLIC_REGISTRATION: "true"
-  AUTH_AUTHENTIK_REDIRECT_ALLOW_LIST: "https://directus.log.weltraumpflege.org/admin/login"
+  AUTH_AUTHENTIK_REDIRECT_ALLOW_LIST: "https://cms.openlab-augsburg.de/admin/login"
   AUTH_AUTHENTIK_ROLE_MAPPING: |
     {
       "Directus Admins": "6e77786a-69c8-4f64-b4c7-990b5ba5c4ef",
