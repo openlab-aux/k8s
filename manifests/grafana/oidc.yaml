@@ -4,7 +4,7 @@ kind: SealedSecret
 metadata:
   creationTimestamp: null
   name: grafana-envs
-  namespace: default
+  namespace: grafana
 spec:
   encryptedData:
     GF_AUTH_CLIENT_ID: AgBS4ktP7KYEyhBu5HNcY3RwHkWVXzNIM6u8qsvvLOWKXaAmVYT17GXxL7o/1N5bgLKpOjT6bvGbHLJr0m26tpT/YuIV7/XkFjwkGxOymTxYtinTyRXm8tD5r2g8HKEWt7FS7CavmyzB+b4D9D5cTyFTZX3iv/mww5pXOJx4fiCP5SrRq/WAi3zSIdR7Gq4VsvJUeqGv5EnSbrI5CeQsa2AosRlEVVdwPOi+FGsYHrNQpE+RJTXrB/H0AJyhRwXlVrExKTqrv56Ngx0QnApIJPCHUXibwKnbitCrri7FZ/6wPDrVbyFA6IwMoout1xmT8d4D0CS+aNdhW/mR3HtADLA5dCcpnbSg4MheUDKPgTdnZ/VzZnbhTP/EiTdDPWmr/uMufNcuOiZdhvy4kPPskyuLDBvO+VZAscHOaf390WIIv+h78CE+unaL8fK8gjhlncNsZ8McYVEdUYWuxrK+AKW0ngx6xzN04F8Lxq8bvkueGbTizWhBzayf9cZzMPtFabNUbtr2Er17LTh7Li1Q82ZXxFYXGHaz40/qmTRoedz00osNdqLCDpfW+9RIa+7FJele3irAPAdJEjef0N+2nYSyind4ECq8DZ8/PJYtuB5LcdR0PhQnXAXNom89itFVsmNgiu9VcNqphYg9Ax6llXVGoCWml7CJ356S90UcQG5xz88t8juhn+pMO7mJl4LMDoefQUFFKYqMRuthOEQrLO9rDoJJDr4P4LoPPLh/1/0=
@@ -13,4 +13,4 @@ spec:
     metadata:
       creationTimestamp: null
       name: grafana-envs
-      namespace: default
+      namespace: grafana
