@@ -7,46 +7,51 @@ spec:
   destination:
     namespace: grafana
     server: "https://kubernetes.default.svc"
-  source:
-    repoURL: "https://grafana.github.io/helm-charts"
-    targetRevision: 9.0.0
-    chart: grafana
-    helm:
-      values: |
-        envFromSecret: grafana-envs
+  sources:
+    - path: manifests/wikijs
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
+    - repoURL: "https://grafana.github.io/helm-charts"
+      targetRevision: 9.0.0
+      chart: grafana
+      helm:
+        values: |
+          envFromSecret: grafana-envs
 
-        grafana.ini:
-          feature_toggles:
-            publicDashboards: true
-          server:
-            root_url: https://grafana.lab.weltraumpflege.org
+          grafana.ini:
+            feature_toggles:
+              publicDashboards: true
+            server:
+              root_url: https://grafana.lab.weltraumpflege.org
 
-           auth.generic_oauth:
-              name: Authentik
-              enabled: true
-              allow_sign_up: true
-              scopes: openid
-              empty_scopes:	false
-              auth_url: "https://auth.openlab-augsburg.de/application/o/authorize"
-              token_url: "https://auth.openlab-augsburg.de/application/o/token"
-              api_url: "https://auth.openlab-augsburg.de/application/o/userinfo"
-              client_id: $__env{GF_AUTH_CLIENT_ID}
-              client_secret: $__env{GF_AUTH_CLIENT_SECRET}
-              role_attribute_strict: true
-              role_attribute_path: contains(groups[*], '**Kubernetes Admins**') && 'Admin' || 'Viewer'
-        ingress:
-          annotations:
-            cert-manager.io/cluster-issuer: le-prod
-          enabled: true
-          hosts:
-          - grafana.lab.weltraumpflege.org
-          ingressClassName: nginx
-          tls:
-          - hosts:
+            auth.generic_oauth:
+                name: Authentik
+                enabled: true
+                allow_sign_up: true
+                scopes: openid
+                empty_scopes:	false
+                auth_url: "https://auth.openlab-augsburg.de/application/o/authorize"
+                token_url: "https://auth.openlab-augsburg.de/application/o/token"
+                api_url: "https://auth.openlab-augsburg.de/application/o/userinfo"
+                client_id: $__env{GF_AUTH_CLIENT_ID}
+                client_secret: $__env{GF_AUTH_CLIENT_SECRET}
+                role_attribute_strict: true
+                role_attribute_path: contains(groups[*], '**Kubernetes Admins**') && 'Admin' || 'Viewer'
+          ingress:
+            annotations:
+              cert-manager.io/cluster-issuer: le-prod
+            enabled: true
+            hosts:
             - grafana.lab.weltraumpflege.org
-            secretName: grafana-tls-prod
-        persistence:
-          enabled: true
-          storageClassName: openebs-hostpath
-        testFramework:
-          enabled: false
+            ingressClassName: nginx
+            tls:
+            - hosts:
+              - grafana.lab.weltraumpflege.org
+              secretName: grafana-tls-prod
+          persistence:
+            enabled: true
+            storageClassName: openebs-hostpath
+          testFramework:
+            enabled: false
