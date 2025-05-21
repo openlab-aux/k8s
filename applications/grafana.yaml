@@ -32,9 +32,9 @@ spec:
                 allow_sign_up: true
                 scopes: openid
                 empty_scopes:	false
-                auth_url: "https://auth.openlab-augsburg.de/application/o/authorize"
-                token_url: "https://auth.openlab-augsburg.de/application/o/token"
-                api_url: "https://auth.openlab-augsburg.de/application/o/userinfo"
+                auth_url: "https://auth.openlab-augsburg.de/application/o/authorize/"
+                token_url: "https://auth.openlab-augsburg.de/application/o/token/"
+                api_url: "https://auth.openlab-augsburg.de/application/o/userinfo/"
                 client_id: $__env{GF_AUTH_CLIENT_ID}
                 client_secret: $__env{GF_AUTH_CLIENT_SECRET}
                 role_attribute_strict: true
