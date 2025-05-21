@@ -21,6 +21,8 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             kubectl
+            kubelogin
+            kubelogin-oidc
             kubeseal
           ];
         };
