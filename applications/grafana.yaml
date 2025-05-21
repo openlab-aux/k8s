@@ -13,7 +13,7 @@ spec:
     chart: grafana
     helm:
       values: |
-        envFromSecret: prometheus-oauth
+        envFromSecret: grafana-envs
 
         grafana.ini:
           feature_toggles:
