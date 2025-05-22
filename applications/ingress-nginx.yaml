@@ -14,6 +14,11 @@ spec:
     helm:
       values: |
         controller:
+          metrics:
+            enable: true
+          podAnnotations:
+            prometheus.io/port: "10254"
+            prometheus.io/scrape: "true"
           service:
             type: NodePort
             nodePorts:
@@ -21,4 +26,3 @@ spec:
               https: 32443
               tcp:
               8080: 32808
-
