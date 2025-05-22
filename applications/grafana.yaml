@@ -38,7 +38,15 @@ spec:
                 client_id: $__env{GF_AUTH_CLIENT_ID}
                 client_secret: $__env{GF_AUTH_CLIENT_SECRET}
                 role_attribute_strict: true
-                role_attribute_path: contains(groups[*], 'Kubernetes Admins') && 'Admin' || 'Viewer'
+                role_attribute_path: contains(groups[*], 'Kubernetes Admins') && 'grafanaAdmin' || 'Viewer'
+                allow_assign_grafana_admin: true
+
+            security:
+                disable_initial_admin_creation: true
+
+            auth:
+                disable_login_form: true
+                oauth_auto_login: true
           ingress:
             annotations:
               cert-manager.io/cluster-issuer: le-prod
