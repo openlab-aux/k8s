@@ -6,7 +6,7 @@ spec:
   project: "default"
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
 
   destination:
     namespace: authentik
@@ -17,13 +17,14 @@ spec:
       targetRevision: main
       directory:
         recurse: true
-  
+
     - repoURL: "https://charts.goauthentik.io"
       targetRevision: 2025.4.1
       chart: "authentik"
       helm:
         values: |
           global:
+            addPrometheusAnnotations: true
             volumes:
               - name: templates
                 configMap:
