@@ -38,7 +38,7 @@ spec:
                 client_id: $__env{GF_AUTH_CLIENT_ID}
                 client_secret: $__env{GF_AUTH_CLIENT_SECRET}
                 role_attribute_strict: true
-                role_attribute_path: contains(groups[*], '**Kubernetes Admins**') && 'Admin' || 'Viewer'
+                role_attribute_path: contains(groups[*], 'Kubernetes Admins') && 'Admin' || 'Viewer'
           ingress:
             annotations:
               cert-manager.io/cluster-issuer: le-prod
