@@ -14,6 +14,9 @@ spec:
     helm:
       values: |
         controller:
+          config:
+            annotations-risk-level: Critical
+            allow-snippet-annotations: true
           metrics:
             enable: true
           podAnnotations:
@@ -24,5 +27,3 @@ spec:
             nodePorts:
               http: 32080
               https: 32443
-              tcp:
-              8080: 32808
