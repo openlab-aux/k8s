@@ -1,0 +1,18 @@
+apiVersion: k8up.io/v1
+kind: Schedule
+metadata:
+  name: backup-schedule
+spec:
+  backend:
+    s3:
+      bucket: openlab-backups/wiki
+  backup:
+    failedJobsHistoryLimit: 2
+    schedule: 0 2 * * *
+    successfulJobsHistoryLimit: 2
+  check:
+    schedule: 0 1 * * 1
+  prune:
+    retention:
+      keepDaily: 21
+    schedule: 0 2 * * 1
