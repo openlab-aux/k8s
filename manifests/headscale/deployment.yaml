@@ -45,7 +45,7 @@ spec:
             - containerPort: 9090
           imagePullPolicy: Always
           volumeMounts:
-            - name: configDir
+            - name: configdir
               mountPath: /etc/headscale/
               readOnly: true
             - name: config
