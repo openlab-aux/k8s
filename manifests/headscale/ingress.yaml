@@ -17,6 +17,16 @@ spec:
                 port:
                   name: web
             pathType: Prefix
+    - host: "www.openlab-augsburg.de"
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: website
+                port:
+                  name: web
+            pathType: Prefix
   tls:
     - hosts:
         - "headscale.lab.weltraumpflege.org"
