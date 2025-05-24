@@ -35,9 +35,9 @@ data:
     db_path: /var/lib/headscale/db.sqlite
 
     acme_url: https://acme-v02.api.letsencrypt.org/directory
-    acme_email: admin@yourdomain.com
+    acme_email: ola-vorstand@lobotomy.diy
 
-    tls_letsencrypt_hostname: headscale.yourdomain.com
+    tls_letsencrypt_hostname: headscale.lab.weltraumpflege.org
     tls_letsencrypt_cache_dir: /var/lib/headscale/cache
     tls_letsencrypt_challenge_type: HTTP-01
     tls_letsencrypt_listen: ":http"
@@ -51,11 +51,10 @@ data:
     dns_config:
       override_local_dns: true
       nameservers:
-        - 1.1.1.1
-        - 8.8.8.8
+        - 9.9.9.9
       domains: []
       magic_dns: true
-      base_domain: yourdomain.com
+      base_domain: headscale.yourdomain.com
 
     unix_socket: /var/run/headscale/headscale.sock
     unix_socket_permission: "0770"
@@ -67,9 +66,9 @@ data:
 
     oidc:
       only_start_if_oidc_is_available: true
-      issuer: "https://authentik.yourdomain.com/application/o/headscale/"
-      client_id: "your-authentik-client-id"
-      client_secret: "your-authentik-client-secret"
+      issuer: "https://auth.openlab-augsburg.de/application/o/headscale/"
+      client_id: "OIDC_CLIENT_ID"
+      client_secret: "OIDCS_CLIENT_SECRET"
       audience: []
       scope: ["openid", "profile", "email"]
       extra_params: {}
