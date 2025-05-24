@@ -37,6 +37,9 @@ spec:
           volumeMounts:
             - name: configdir
               mountPath: /etc/headscale
+            - name: config
+              mountPath: /etc/headscale/config.yaml
+              readOnly: true
       containers:
         - image: docker.io/yonggan/headscale
           name: headscale
