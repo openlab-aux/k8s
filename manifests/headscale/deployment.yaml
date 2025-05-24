@@ -15,6 +15,30 @@ spec:
       labels:
         app: headscale
     spec:
+      initContainers:
+        - name: config-processor
+          image: busybox
+          env:
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: headscale-secrets
+                  value: oidcClientId
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: headscale-secrets
+                  value: oidcClientSecret
+          command:
+            - sh
+            - -c
+            - |
+              envsubst < /etc/headscale/config.yaml > /template/config.template
+          volumeMounts:
+            - name: config-template
+              mountPath: /template
+            - name: processed-config
+              mountPath: /config
       containers:
         - image: docker.io/yonggan/headscale
           name: headscale
