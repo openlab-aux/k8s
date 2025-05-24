@@ -15,7 +15,6 @@ spec:
       labels:
         app: headscale
     spec:
-<<<<<<< HEAD
       initContainers:
         - name: config-processor
           image: busybox
@@ -40,8 +39,6 @@ spec:
               mountPath: /template
             - name: processed-config
               mountPath: /config
-=======
->>>>>>> 7a89c26 (Add config)
       containers:
         - image: docker.io/yonggan/headscale
           name: headscale
