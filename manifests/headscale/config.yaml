@@ -54,7 +54,7 @@ data:
         - 9.9.9.9
       domains: []
       magic_dns: true
-      base_domain: headscale.yourdomain.com
+      base_domain: headscale.lab.weltraumpflege.org
 
     unix_socket: /var/run/headscale/headscale.sock
     unix_socket_permission: "0770"
