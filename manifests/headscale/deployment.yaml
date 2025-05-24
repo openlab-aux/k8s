@@ -23,12 +23,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: headscale-secrets
-                  value: oidcClientId
+                  key: oidcClientId
             - name: OIDC_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: headscale-secrets
-                  value: oidcClientSecret
+                  key: oidcClientSecret
           command:
             - sh
             - -c
