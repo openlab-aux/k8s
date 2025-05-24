@@ -21,7 +21,7 @@ spec:
             additionalScrapeConfigs:
               - job_name: kubernetes-service-endpoints
                 kubernetes_sd_configs:
-                - role: service
+                - role: endpoints
                 relabel_configs:
 
                 # annotation 'prometheus.io/scrape' must be set to 'true'
