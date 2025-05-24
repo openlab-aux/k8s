@@ -21,46 +21,53 @@ spec:
             additionalScrapeConfigs:
               - job_name: kubernetes-service-endpoints
                 kubernetes_sd_configs:
-                - role: pod 
+                - role: endpoints
                 relabel_configs:
-
-                # annotation 'prometheus.io/scrape' must be set to 'true'
+                - action: drop
+                  regex: true
+                  source_labels:
+                  - __meta_kubernetes_pod_container_init
+                - action: keep_if_equal
+                  source_labels:
+                  - __meta_kubernetes_service_annotation_prometheus_io_port
+                  - __meta_kubernetes_pod_container_port_number
                 - action: keep
                   regex: true
-                  source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
-
-                # service cannot be in kube-system or prom namespaces
-                - action: drop
-                  regex: (kube-system|prom)
-                  source_labels: [__meta_kubernetes_namespace]
-
-                # service port name must end with word 'metrics'
-                - action: keep
-                  regex: .*metrics
-                  source_labels: [__meta_kubernetes_service_port_name]
-
-                # allow override of http scheme
+                  source_labels:
+                  - __meta_kubernetes_service_annotation_prometheus_io_scrape
                 - action: replace
                   regex: (https?)
-                  source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
+                  source_labels:
+                  - __meta_kubernetes_service_annotation_prometheus_io_scheme
                   target_label: __scheme__
-
-                # allow override of default /metrics path
                 - action: replace
                   regex: (.+)
-                  source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+                  source_labels:
+                  - __meta_kubernetes_service_annotation_prometheus_io_path
                   target_label: __metrics_path__
-
-                # allow override of default port
                 - action: replace
                   regex: ([^:]+)(?::\d+)?;(\d+)
                   replacement: $1:$2
-                  source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+                  source_labels:
+                  - __address__
+                  - __meta_kubernetes_service_annotation_prometheus_io_port
                   target_label: __address__
-                - {action: labelmap, regex: __meta_kubernetes_service_label_(.+)}
+                - action: labelmap
+                  regex: __meta_kubernetes_service_label_(.+)
+                - source_labels:
+                  - __meta_kubernetes_pod_name
+                  target_label: pod
+                - source_labels:
+                  - __meta_kubernetes_namespace
+                  target_label: namespace
+                - source_labels:
+                  - __meta_kubernetes_service_name
+                  target_label: service
+                - replacement: ${1}
+                  source_labels:
+                  - __meta_kubernetes_service_name
+                  target_label: job
                 - action: replace
-                  source_labels: [__meta_kubernetes_namespace]
-                  target_label: kubernetes_namespace
-                - action: replace
-                  source_labels: [__meta_kubernetes_service_name]
-                  target_label: kubernetes_name
+                  source_labels:
+                  - __meta_kubernetes_pod_node_name
+                  target_label: node
