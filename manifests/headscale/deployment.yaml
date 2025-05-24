@@ -58,9 +58,9 @@ spec:
             - name: run
               mountPath: /var/run/headscale
       volumes:
-        name: config
-        configMap:
-          name: headscale-config
+        - name: config
+          configMap:
+            name: headscale-config
   volumeClaimTemplates:
     - metadata:
         name: configDir
