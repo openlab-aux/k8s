@@ -23,7 +23,7 @@ spec:
           - path: /
             backend:
               service:
-                name: headscale
+                name: website
                 port:
                   name: web
             pathType: Prefix
