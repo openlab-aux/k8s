@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: headscale
+  name: headscale
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: headscale
+  template:
+    metadata:
+      labels:
+        app: headscale
+    spec:
+      containers:
+        - image: docker.io/yonggan/headscale
+          name: headscale
+          ports:
+            - containerPort: 8080
+            - containerPort: 9090
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: configDir
+              mountPath: /etc/headscale/
+              readOnly: true
+            - name: config
+              mountPath: /etc/headscale/config.yaml
+              readOnly: true
+            - name: lib
+              mountPath: /var/lib/headscale
+            - name: run
+              mountPath: /var/run/headscale
+      volumes:
+        name: config
+        configMap:
+          name: headscale-config
+  volumeClaimTemplates:
+    - metadata:
+        name: configDir
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: lib
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: run
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
