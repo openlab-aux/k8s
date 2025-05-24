@@ -1,13 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: headscale
+  name: website
   annotations:
     cert-manager.io/cluster-issuer: le-prod
 spec:
   ingressClassName: nginx
   rules:
-    - host: "headscale.lab.weltraumpflege.org"
+    - host: "openlab-augsburg.de"
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: website
+                port:
+                  name: web
+            pathType: Prefix
+    - host: "www.openlab-augsburg.de"
       http:
         paths:
           - path: /
