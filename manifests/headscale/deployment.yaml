@@ -35,10 +35,8 @@ spec:
             - |
               envsubst < /etc/headscale/config.yaml > /template/config.template
           volumeMounts:
-            - name: config-template
-              mountPath: /template
-            - name: processed-config
-              mountPath: /config
+            - name: configdir
+              mountPath: /etc/headscale
       containers:
         - image: docker.io/yonggan/headscale
           name: headscale
@@ -63,7 +61,7 @@ spec:
             name: headscale-config
   volumeClaimTemplates:
     - metadata:
-        name: configDir
+        name: configdir
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
