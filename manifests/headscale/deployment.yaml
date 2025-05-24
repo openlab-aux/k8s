@@ -15,7 +15,6 @@ spec:
       labels:
         app: headscale
     spec:
-      initContainers:
         - name: config-processor
           image: busybox
           env:
