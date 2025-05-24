@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: headscale-config
+  namespace: headscale
+data:
+  config.yaml: |
+    server_url: https://headscale.lab.weltraumpflege.org
+    listen_addr: 0.0.0.0:8080
+    metrics_listen_addr: 0.0.0.0:9090
+    grpc_listen_addr: 0.0.0.0:50443
+    grpc_allow_insecure: false
+
+    private_key_path: /etc/headscale/private.key
+    noise:
+      private_key_path: /etc/headscale/noise_private.key
+
+    prefixes:
+      v4: 100.64.0.0/10
+      v6: fd7a:115c:a1e0::/48
+
+    derp:
+      server:
+        enabled: false
+      urls:
+        - https://controlplane.tailscale.com/derpmap/default
+      auto_update_enabled: true
+      update_frequency: 24h
+
+    disable_check_updates: false
+    ephemeral_node_inactivity_timeout: 30m
+    node_update_check_interval: 10s
+
+    db_type: sqlite3
+    db_path: /var/lib/headscale/db.sqlite
+
+    acme_url: https://acme-v02.api.letsencrypt.org/directory
+    acme_email: admin@yourdomain.com
+
+    tls_letsencrypt_hostname: headscale.yourdomain.com
+    tls_letsencrypt_cache_dir: /var/lib/headscale/cache
+    tls_letsencrypt_challenge_type: HTTP-01
+    tls_letsencrypt_listen: ":http"
+
+    log:
+      format: text
+      level: info
+
+    acl_policy_path: ""
+
+    dns_config:
+      override_local_dns: true
+      nameservers:
+        - 1.1.1.1
+        - 8.8.8.8
+      domains: []
+      magic_dns: true
+      base_domain: yourdomain.com
+
+    unix_socket: /var/run/headscale/headscale.sock
+    unix_socket_permission: "0770"
+
+    logtail:
+      enabled: false
+
+    randomize_client_port: false
+
+    oidc:
+      only_start_if_oidc_is_available: true
+      issuer: "https://authentik.yourdomain.com/application/o/headscale/"
+      client_id: "your-authentik-client-id"
+      client_secret: "your-authentik-client-secret"
+      audience: []
+      scope: ["openid", "profile", "email"]
+      extra_params: {}
+      allowed_domains: []
+      allowed_groups: []
+      allowed_users: []
+      strip_email_domain: true
+      expiry: 180d
+      use_expiry_from_token: false
