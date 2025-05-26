@@ -10,10 +10,14 @@ spec:
       port: 8080
       protocol: TCP
       targetPort: 8080
-    - name: other
+    - name: metrics
       port: 9090
       protocol: TCP
       targetPort: 9090
+    - name: ui
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
   selector:
     app: headscale
   type: ClusterIP
