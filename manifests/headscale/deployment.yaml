@@ -17,7 +17,7 @@ spec:
     spec:
       initContainers:
         - name: config-processor
-          image: busybox
+          image: jobilla/google-cloud-sdk
           env:
             - name: OIDC_CLIENT_ID
               valueFrom:
@@ -33,15 +33,17 @@ spec:
             - sh
             - -c
             - |
-              envsubst < /tmp/config.yaml > /template/config.template
+              envsubst < /tmp/config.yaml > /etc/headscale/config.yaml
+              cat /etc/headscale/config.yaml
           volumeMounts:
             - name: configdir
               mountPath: /etc/headscale
             - name: config
-              mountPath: /tmp/config.yaml
+              mountPath: /tmp
       containers:
-        - image: docker.io/yonggan/headscale
+        - image: docker.io/headscale/headscale
           name: headscale
+          args: ["serve"]
           ports:
             - containerPort: 8080
             - containerPort: 9090
@@ -53,10 +55,18 @@ spec:
               mountPath: /var/lib/headscale
             - name: run
               mountPath: /var/run/headscale
+        - image: ghcr.io/gurucomputing/headscale-ui
+          name: ui
+          ports:
+            - containerPort: 9000
+          env:
+            - name: HTTP_PORT
+              value: "9000"
       volumes:
         - name: config
           configMap:
             name: headscale-config
+
   volumeClaimTemplates:
     - metadata:
         name: configdir

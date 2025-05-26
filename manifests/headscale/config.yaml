@@ -31,30 +31,23 @@ data:
     ephemeral_node_inactivity_timeout: 30m
     node_update_check_interval: 10s
 
-    db_type: sqlite3
-    db_path: /var/lib/headscale/db.sqlite
-
-    acme_url: https://acme-v02.api.letsencrypt.org/directory
-    acme_email: ola-vorstand@lobotomy.diy
-
-    tls_letsencrypt_hostname: headscale.lab.weltraumpflege.org
-    tls_letsencrypt_cache_dir: /var/lib/headscale/cache
-    tls_letsencrypt_challenge_type: HTTP-01
-    tls_letsencrypt_listen: ":http"
+    database:
+      type: sqlite
+      sqlite:
+        path: /var/lib/headscale/db.sqlite
 
     log:
       format: text
       level: info
 
-    acl_policy_path: ""
+    policy:
+      path: ""
 
-    dns_config:
-      override_local_dns: true
-      nameservers:
-        - 9.9.9.9
+    dns:
+      override_local_dns: false
       domains: []
       magic_dns: true
-      base_domain: headscale.lab.weltraumpflege.org
+      base_domain: vpn.lab.weltraumpflege.org
 
     unix_socket: /var/run/headscale/headscale.sock
     unix_socket_permission: "0770"
@@ -67,14 +60,8 @@ data:
     oidc:
       only_start_if_oidc_is_available: true
       issuer: "https://auth.openlab-augsburg.de/application/o/headscale/"
-      client_id: "OIDC_CLIENT_ID"
-      client_secret: "OIDCS_CLIENT_SECRET"
-      audience: []
+      client_id: "$OIDC_CLIENT_ID"
+      client_secret: "$OIDC_CLIENT_SECRET"
       scope: ["openid", "profile", "email"]
-      extra_params: {}
-      allowed_domains: []
-      allowed_groups: []
-      allowed_users: []
-      strip_email_domain: true
-      expiry: 180d
-      use_expiry_from_token: false
+      extra_params:
+        domain_hint: auth.openlab-augsburg.de

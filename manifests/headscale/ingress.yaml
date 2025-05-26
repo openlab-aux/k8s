@@ -10,6 +10,16 @@ spec:
     - host: "headscale.lab.weltraumpflege.org"
       http:
         paths:
+          - path: /web
+            backend:
+              service:
+                name: headscale
+                port:
+                  name: ui
+            pathType: Prefix
+    - host: "headscale.lab.weltraumpflege.org"
+      http:
+        paths:
           - path: /
             backend:
               service:
