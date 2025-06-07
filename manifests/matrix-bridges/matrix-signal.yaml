@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: mautrix-signal
-        image: dock.mau.dev/mautrix/signal:1b1136537d3125d8ede55ce490dcfc6bd27a3f34-arm64
+        image: dock.mau.dev/mautrix/signal:1dca367f7b1f66deb46f3a577720ffd6e6715b5a-arm64
         ports:
         volumeMounts:
         - name: data
