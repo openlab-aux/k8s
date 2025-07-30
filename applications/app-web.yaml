@@ -9,7 +9,7 @@ spec:
   source:
     path: manifests
     repoURL: "https://github.com/openlab-aux/openlab-app.git"
-    targetRevision: "feat/k8s-manifests"
+    targetRevision: "master"
     directory:
       recurse: true
   project: default
