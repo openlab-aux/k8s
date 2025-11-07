@@ -52,7 +52,7 @@ spec:
                   name: db-app
                   key: password
             - name: REDIS_URL
-              value: redis://default:A36B6jX4BG@redis-master:6379/1
+              value: redis://127.0.0.1:6379/0
             - name: MULTIUSER
               value: "enabled"
             - name: REGISTRATION
@@ -67,7 +67,23 @@ spec:
               value: "443"
             - name: HTTPS_ONLY
               value: "enabled"
-
+        - image: valkey/valkey
+          name: valkey
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "valkey-cli -h 127.0.0.1 PING | grep PONG"
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            timeoutSeconds: 2
   volumeClaimTemplates:
     - metadata:
         name: manyfold-libraries
