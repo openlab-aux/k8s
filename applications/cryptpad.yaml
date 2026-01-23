@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: "ghcr.io/cryptpad/helm"
       chart: cryptpad
-      targetRevision: 0.0.20
+      targetRevision: 0.0.21
       helm:
         values: |
           persistence:
