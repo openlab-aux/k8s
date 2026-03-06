@@ -50,7 +50,6 @@ spec:
               oidc:
                 enabled: true
                 baseURI: "https://auth.openlab-augsburg.de/application/o/penpot/"
-                roles: "0441017d-2e87-4368-91db-22ee536096e2"
 
               existingSecret: "oidc"
               secretKeys:
