@@ -50,7 +50,7 @@ spec:
                 passwordKey: "password"
 
             redis:
-              host: "valkey.penpot.svc.cluster.local"
+              host: "penpot-valkey.penpot.svc.cluster.local"
 
             providers:
               oidc:
