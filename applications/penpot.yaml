@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: penpot
+spec:
+  project: "default"
+  destination:
+    namespace: penpot
+    server: "https://kubernetes.default.svc"
+  sources:
+    - path: manifests/penpot
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
+    - repoURL: "https://valkey.io/valkey-helm/"
+      targetRevision: "0.9.3"
+      chart: "valkey"
+    - repoURL: "https://helm.penpot.app"
+      targetRevision: "0.35.0"
+      chart: "penpot"
+      helm:
+        values: |
+          ingress:
+            enabled: true
+            className: "nginx"
+            hosts:
+              - "penpot.openlab-augsburg.de"
+            tls:
+              - secretName: penpot.openlab-augsburg.de
+                hosts:
+                  - penpot.openlab-augsburg.de
+
+          config:
+            publicUri: "https://penpot.openlab-augsburg.de"
+            flags: "disable-email-verification enable-login-with-oidc enable-oidc-registration"
+            telemetryEnabled: false
+
+            postgresql:
+              host: "db-rw.penpot.svc.cluster.local"
+              username: "app"
+              existingSecret: "db-app"
+              secretKeys:
+                passwordKey: "password"
+
+            redis:
+              host: "valkey.penpot.svc.cluster.local"
+
+            providers:
+              oidc:
+                enabled: true
+                baseURI: "https://auth.openlab-augsburg.de/application/o/penpot/"
+                roles: "0441017d-2e87-4368-91db-22ee536096e2"
+
+              existingSecret: "oidc"
+              secretKeys:
+                oidcClientIDKey: "client-id"
+                oidcClientSecretKey: "client-secret"
