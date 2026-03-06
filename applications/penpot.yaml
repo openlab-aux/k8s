@@ -42,6 +42,7 @@ spec:
             postgresql:
               host: "db-rw.penpot.svc.cluster.local"
               username: "app"
+              database: "app"
               existingSecret: "db-app"
               secretKeys:
                 passwordKey: "password"
