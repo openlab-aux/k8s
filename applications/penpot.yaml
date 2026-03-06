@@ -4,6 +4,9 @@ metadata:
   name: penpot
 spec:
   project: "default"
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
   destination:
     namespace: penpot
     server: "https://kubernetes.default.svc"
