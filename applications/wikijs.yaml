@@ -19,12 +19,14 @@ spec:
       helm:
         values: |
           postgresql:
-            postgresqlUser: app
-            postgresqlDatabase: app
-            postgresqlHost: db-rw.wikijs.svc.cluster.local
+            enabled: false
+          externalPostgresql:
+            username: app
+            database: app
+            host: db-rw.wikijs.svc.cluster.local
+            port: 5432
             existingSecret: db-app
             existingSecretKey: password
-            enabled: false
           ingress:
             className: nginx
             enabled: true
