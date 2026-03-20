@@ -11,7 +11,7 @@ spec:
     - host: "api.openlab-augsburg.de"
       http:
         paths:
-          - path: /13
+          - path: /data.json
             backend:
               service:
                 name: website
