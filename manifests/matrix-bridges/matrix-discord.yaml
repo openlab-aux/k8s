@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: mautrix-discord
-        image: dock.mau.dev/mautrix/discord:a6d9e62b497a36c4b61d240d6dc774359be65168-arm64
+        image: dock.mau.dev/mautrix/discord:04fbf2870b7badabf56203953478e5e8cdd03a6b-arm64
         ports:
         volumeMounts:
         - name: data
