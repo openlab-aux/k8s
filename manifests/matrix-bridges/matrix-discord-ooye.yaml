@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: ooye
-        image: git.shork.ch/oci-images/out-of-your-element:v3.4
+        image: ghcr.io/y0ngg4n/ooye:master
         ports:
         volumeMounts:
         - name: db
