@@ -34,7 +34,7 @@ spec:
         ports:
          - containerPort: 6693
            protocol: TCP
-        args: setup
+        args: [ "setup" ]
         volumeMounts:
         - name: db
           mountPath: /data
