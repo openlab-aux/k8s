@@ -31,10 +31,13 @@ spec:
       containers:
       - name: ooye
         image: sim2kid/ooye-docker:v3.5
+        command: [ "sleep" ]
+        args: [ "infinity" ]
         ports:
          - containerPort: 6693
            protocol: TCP
-        args: [ "setup" ]
+                  commands: ["/bin/tail" "-f" "/dev/null"]
+
         volumeMounts:
         - name: db
           mountPath: /data
