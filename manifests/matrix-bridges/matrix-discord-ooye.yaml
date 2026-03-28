@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: ooye
-        image: ghcr.io/y0ngg4n/ooye:master
+        image: sim2kid/ooye-docker:v3.5
         ports:
         volumeMounts:
         - name: db
