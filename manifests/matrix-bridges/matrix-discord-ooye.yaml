@@ -32,10 +32,12 @@ spec:
       - name: ooye
         image: sim2kid/ooye-docker:v3.5
         ports:
+         - containerPort: 6693
+           protocol: TCP
+        args: setup
         volumeMounts:
         - name: db
-          mountPath: /usr/src/app/
-          subPath: ooye.db
+          mountPath: /data
   volumeClaimTemplates:
   - metadata:
       name: db
