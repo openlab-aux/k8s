@@ -57,6 +57,7 @@ spec:
                 enabled: true
                 baseURI: "https://auth.openlab-augsburg.de/application/o/penpot/"
                 scopes: "email profile openid"
+                roles: "Members"
 
               existingSecret: "oidc"
               secretKeys:
