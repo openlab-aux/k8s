@@ -38,7 +38,7 @@ spec:
 
           config:
             publicUri: "https://penpot.openlab-augsburg.de"
-            flags: "disable-email-verification enable-login-with-oidc enable-oidc-registration"
+            flags: "disable-email-verification disable-login-with-password disable-registration enable-login-with-oidc enable-oidc-registration"
             telemetryEnabled: false
 
             postgresql:
