@@ -17,7 +17,7 @@ spec:
       directory:
         recurse: true
     - repoURL: "https://valkey.io/valkey-helm/"
-      targetRevision: "0.9.3"
+      targetRevision: "0.9.4"
       chart: "valkey"
     - repoURL: "https://helm.penpot.app"
       targetRevision: "0.39.0"
