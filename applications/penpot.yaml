@@ -20,7 +20,7 @@ spec:
       targetRevision: "0.9.4"
       chart: "valkey"
     - repoURL: "https://helm.penpot.app"
-      targetRevision: "0.39.0"
+      targetRevision: "0.40.0"
       chart: "penpot"
       helm:
         values: |
