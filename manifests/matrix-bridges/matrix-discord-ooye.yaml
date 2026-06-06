@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: ooye
-        image: sim2kid/ooye-docker:v3.5
+        image: sim2kid/ooye-docker:v3.6
         command: [ "sleep" ]
         args: [ "infinity" ]
         ports:
