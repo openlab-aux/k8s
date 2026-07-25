@@ -31,7 +31,14 @@ spec:
     spec:
       containers:
       - name: mautrix-signal
-        image: dock.mau.dev/mautrix/signal:e3d058732adc0325674991dabf2fc65883a39024-arm64
+        command:
+          - /usr/bin/mautrix-signal
+          - '-c'
+          - /data/config.yaml
+          - '-r'
+          - /data/registration.yaml
+          - '--ignore-unsupported-server'
+        image: dock.mau.dev/mautrix/signal:v26.07
         ports:
         volumeMounts:
         - name: data
