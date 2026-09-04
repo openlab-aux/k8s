@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: mautrix-telegram
-        image: dock.mau.dev/mautrix/telegram:v26.07
+        image: dock.mau.dev/mautrix/telegram:v26.08
         ports:
         volumeMounts:
         - name: data
