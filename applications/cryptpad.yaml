@@ -13,6 +13,7 @@ spec:
       targetRevision: 0.1.0
       helm:
         values: |
+          mainDomain: ola.lol
           persistence:
             cryptpad:
               blob:
