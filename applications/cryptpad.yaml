@@ -30,7 +30,7 @@ spec:
             annotations:
               cert-manager.io/cluster-issuer: le-prod
             hosts:
-            - host: ola.lol
+            - ola.lol
             tls:
             - secretName: cryptpad-tls-ola-lol
               hosts:
