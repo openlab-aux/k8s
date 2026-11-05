@@ -36,19 +36,21 @@ spec:
             optional: false
       containers:
         - name: dendrite
-          image: docker.io/matrixdotorg/dendrite-monolith:v0.15.2
+          # We are sneaky fucking liars, calling it dendrite when it's actually zendrite
+          # Hehe.
+          image: codefloe.com/pat-s/zendrite:3.6.0
           ports:
             - containerPort: 8008
             - containerPort: 8448
           volumeMounts:
             - name: config
-              mountPath: /etc/dendrite
+              mountPath: /etc/zendrite
             - name: media
-              mountPath: /var/dendrite/media
+              mountPath: /var/zendrite/media
             - name: jetstream
-              mountPath: /var/dendrite/jetstream
+              mountPath: /var/zendrite/jetstream
             - name: searchindex
-              mountPath: /var/dendrite/searchindex
+              mountPath: /var/zendrite/searchindex
   volumeClaimTemplates:
     - metadata:
         name: media
