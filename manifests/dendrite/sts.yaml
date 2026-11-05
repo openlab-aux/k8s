@@ -38,7 +38,7 @@ spec:
         - name: dendrite
           # We are sneaky fucking liars, calling it dendrite when it's actually zendrite
           # Hehe.
-          image: codefloe.com/pat-s/zendrite:3.6.0
+          image: codefloe.com/pat-s/zendrite:3.7.0
           securityContext:
             fsGroup: 1000
             fsGroupChangePolicy: "OnRootMismatch"
