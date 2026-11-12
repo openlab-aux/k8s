@@ -18,9 +18,9 @@ spec:
       targetRevision: 0.1.0-alpha.1
       helm:
         values: |
-          newtInstances:
-            - name: fmd-tunnel
-              enabled: true
-              auth:
-                existingSecretName: fmd-newt-auth
-              replicas: 1
+          # newtInstances:
+          #   - name: fmd-tunnel
+          #     enabled: true
+          #     auth:
+          #       existingSecretName: fmd-newt-auth
+          #     replicas: 1
