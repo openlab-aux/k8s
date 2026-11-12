@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pangolin
+spec:
+  project: "default"
+  destination:
+    namespace: pangolin
+    server: "https://kubernetes.default.svc"
+  sources:
+    - path: manifests/pangolin
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
+    - repoURL: "https://charts.fossorial.io"
+      chart: pangolin
+      targetRevision: 0.1.0-alpha.1
+      helm:
+        values: |
+          newtInstances:
+            - name: fmd-tunnel
+              enabled: true
+              auth:
+                existingSecretName: fmd-newt-auth
+              replicas: 1
