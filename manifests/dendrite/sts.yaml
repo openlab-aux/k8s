@@ -41,7 +41,7 @@ spec:
         - name: dendrite
           # We are sneaky fucking liars, calling it dendrite when it's actually zendrite
           # Hehe.
-          image: codefloe.com/pat-s/zendrite:3.9.0
+          image: codefloe.com/pat-s/zendrite:3.9.1
           ports:
             - containerPort: 8008
             - containerPort: 8448
