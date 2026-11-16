@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frps
+  namespace: frp
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: frps }
+  template:
+    metadata:
+      labels: { app: frps }
+    spec:
+      containers:
+        - name: frps
+          image: fatedier/frps:v0.61.1
+          args: ["-c", "/etc/frp/frps.toml"]
+          env:
+            - name: FRP_TOKEN
+              valueFrom:
+                secretKeyRef: { name: frp-token, key: token }
+          ports:
+            - { containerPort: 7000 }
+            - { containerPort: 8080 }
+          volumeMounts:
+            - { name: cfg, mountPath: /etc/frp }
+      volumes:
+        - name: cfg
+          configMap: { name: frps }
