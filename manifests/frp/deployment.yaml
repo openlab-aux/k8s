@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: frps
-          image: fatedier/frps:v0.61.1
+          image: fatedier/frps:v0.72.0
           args: ["-c", "/etc/frp/frps.toml"]
           env:
             - name: FRP_TOKEN
