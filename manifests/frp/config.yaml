@@ -9,3 +9,5 @@ data:
     vhostHTTPPort = 8080
     auth.method = "token"
     auth.token = "{{ .Envs.FRP_TOKEN }}"
+    transport.useEncryption = true
+    transport.useCompression = true
