@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frp
+spec:
+  project: "default"
+  destination:
+    namespace: frp
+    server: "https://kubernetes.default.svc"
+  sources:
+    - path: manifests/frp
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true
