@@ -11,7 +11,8 @@ metadata:
 spec:
   ingressClassName: haproxy
   tls:
-    - hosts: [fmd.openlab-augsburg.de]
+    - hosts:
+        - fmd.openlab-augsburg.de
       secretName: fmd-tls
   rules:
     - host: fmd.openlab-augsburg.de
