@@ -28,7 +28,6 @@ data:
       update_frequency: 24h
 
     disable_check_updates: false
-    ephemeral_node_inactivity_timeout: 30m
     node_update_check_interval: 10s
 
     database:
@@ -39,6 +38,10 @@ data:
     log:
       format: text
       level: info
+
+    node:
+      ephemeral:
+        inactivity_timeout: 30m
 
     policy:
       path: ""
@@ -57,8 +60,6 @@ data:
 
     logtail:
       enabled: false
-
-    randomize_client_port: false
 
     oidc:
       only_start_if_oidc_is_available: true
