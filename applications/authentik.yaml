@@ -81,6 +81,7 @@ spec:
               - mountPath: "/media"
                 name: media
             ingress:
+              ingressClassName: haproxy
               enabled: true
               hosts:
                 - auth.openlab-augsburg.de

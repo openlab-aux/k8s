@@ -28,7 +28,7 @@ spec:
             existingSecret: db-app
             existingSecretKey: password
           ingress:
-            className: nginx
+            className: haproxy
             enabled: true
             hosts:
               - host: wiki.openlab-augsburg.de

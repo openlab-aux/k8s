@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-haproxy
+spec:
+  project: default
+  destination:
+    namespace: ingress-haproxy
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://haproxytech.github.io/helm-charts"
+    targetRevision: 1.57.1
+    chart: kubernetes-ingress
+    helm:
+      values: |
+        controller:
+          replicaCount: 1
+          ingressClassResource:
+            name: haproxy
+            default: true
+          service:
+            type: NodePort
+            nodePorts:
+              http: 32080
+              https: 32443

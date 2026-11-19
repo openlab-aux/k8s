@@ -26,7 +26,7 @@ spec:
                 size: 5Gi  
           ingress:
             enabled: true
-            className: nginx
+            className: haproxy
             annotations:
               cert-manager.io/cluster-issuer: le-prod
             hosts:

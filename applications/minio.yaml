@@ -23,7 +23,7 @@ spec:
           ingress:
             api:
               enabled: true
-              ingressClassName: nginx
+              ingressClassName: haproxy
               host: minio.lab.weltraumpflege.org
               annotations:
                 cert-manager.io/cluster-issuer: le-prod
@@ -41,7 +41,7 @@ spec:
                   secretName: minio-api-cert
             console:
               enabled: true
-              ingressClassname: nginx
+              ingressClassname: haproxy
               host: console.minio.lab.weltraumpflege.org
               annotations:
                 cert-manager.io/cluster-issuer: le-prod

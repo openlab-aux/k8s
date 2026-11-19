@@ -6,7 +6,7 @@ metadata:
     cert-manager.io/cluster-issuer: le-prod
     nginx.ingress.kubernetes.io/rewrite-target:  /api/api.json
 spec:
-  ingressClassName: nginx
+  ingressClassName: haproxy
   rules:
     - host: "api.openlab-augsburg.de"
       http:

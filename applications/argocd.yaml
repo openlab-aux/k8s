@@ -36,8 +36,9 @@ spec:
           ingress:
             enabled: true
             https: true
-            ingressClassName: nginx
+            ingressClassName: haproxy
             annotations:
+              haproxy.org/server-ssl: "true" 
               cert-manager.io/cluster-issuer: le-prod
             hostname: argocd.lab.weltraumpflege.org
             tls: true
