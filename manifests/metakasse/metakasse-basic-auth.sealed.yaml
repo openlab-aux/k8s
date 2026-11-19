@@ -1,0 +1,13 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: metakasse-basic-auth
+  namespace: metakasse
+spec:
+  encryptedData:
+    metakasse: AgBejLUZzI5sBKFhexKkIRV92XNcHlX12aY6tYqTKtfBuG62wY9kmOAiLP2xm/2lUGU5HtHKiuDY4EojbfWYj1B8IuWafb4PFqbvIazyeVWLMjPOU2XyUjYNnXfZdcmRmYksZfHeJ8+jx9FLusLoc39Lzxh8Smog5klbvc7QiBfBKulDyVUhBGQYdYeHxQJcMa7JGg5xJwKg1ZG15S7gbC7gjtcTdWCQnmtYvD8Tm3gIWnCUh+5C3JpMWPp0WIX3kQbixq/LcF+zohhqiY8E3EOzNyKTiWg8hW/C2Ep6jzkuFp6IekgMO15CdGsC1Orl4lIbulCsJqXLwkxMOQEab6A3B5R4qfFA3l9sGxASCWlg8bxXYZxGwGvo+DRuU9gukWJieB2yQTGILwO4b+5/NmMYvg59R0fqdqajA/WZden2Wo6JJgXa1vclf5etvt9LkP9bkEnXUxsglv9zwCJqNPcO0VDWOIrIElxhH4xslTZVa4xDdobqpdtZv5NW3I/hzoMIXmL2HYe412kagNZrhPWT4s6l6L4KVu8V6ugzKFDRcyu1a/Q7+Hht9Bu60+0n6tRDznahRvit2lmt3XI9fVVOfHboHnX30trdEpNFo0zeRQJnrbxmiYYjkyDs1ieYXHVQoxZiMQWB2UeNTRTgGB/PpZVKnxKoRNKeaeU7+XcsEv8SkNw/F9AhJjsO31ix8elE4o8PAwcXAIDs6HCBoVLXAMmCR2AKhTRIri2OZEtWU7ZbQzXvGSdVtzPqlzaJPcraIlWrgKXVTT5WnjB+X5+1gkaY9iV5fRDbHX7Jr1YjkQEUMDBbRojHogZEylFTNxoaJuIG4/CIrB1H
+  template:
+    metadata:
+      name: metakasse-basic-auth
+      namespace: metakasse
