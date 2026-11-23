@@ -6,6 +6,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: le-prod
     nginx.ingress.kubernetes.io/proxy-body-size: 15m
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 spec:
   ingressClassName: nginx
   tls:
@@ -16,7 +18,18 @@ spec:
     - host: fmd.openlab-augsburg.de
       http:
         paths:
+          - path: /~!frp
+            pathType: Prefix
+            backend:
+              service:
+                name: frps-control
+                port:
+                  number: 7000
+
           - path: /
             pathType: Prefix
             backend:
-              service: { name: frps, port: { number: 8080 } }
+              service:
+                name: frps
+                port:
+                  number: 8080
