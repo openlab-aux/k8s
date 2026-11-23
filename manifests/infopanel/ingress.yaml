@@ -5,7 +5,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: le-prod
 spec:
-  ingressClassName: nginx
+  ingressClassName: haproxy
   rules:
     - host: "infopanel2.lab.weltraumpflege.org"
       http:

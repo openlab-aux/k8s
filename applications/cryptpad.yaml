@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: "ghcr.io/cryptpad/helm"
       chart: cryptpad
-      targetRevision: 0.1.0
+      targetRevision: 0.2.0
       helm:
         values: |
           mainDomain: ola.lol
@@ -26,7 +26,7 @@ spec:
                 size: 5Gi  
           ingress:
             enabled: true
-            className: nginx
+            className: haproxy
             annotations:
               cert-manager.io/cluster-issuer: le-prod
             hosts:

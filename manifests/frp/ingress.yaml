@@ -9,10 +9,9 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 spec:
-  ingressClassName: nginx
+  ingressClassName: haproxy
   tls:
-    - hosts:
-        - fmd.openlab-augsburg.de
+    - hosts: [fmd.openlab-augsburg.de]
       secretName: fmd-tls
   rules:
     - host: fmd.openlab-augsburg.de

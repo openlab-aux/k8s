@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://argoproj.github.io/argo-helm"
-    targetRevision: 10.18.0
+    targetRevision: 10.18.2
     chart: argo-cd
     helm:
       values: |
@@ -36,8 +36,9 @@ spec:
           ingress:
             enabled: true
             https: true
-            ingressClassName: nginx
+            ingressClassName: haproxy
             annotations:
+              haproxy.org/server-ssl: "true" 
               cert-manager.io/cluster-issuer: le-prod
             hostname: argocd.lab.weltraumpflege.org
             tls: true

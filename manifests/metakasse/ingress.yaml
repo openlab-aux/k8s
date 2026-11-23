@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: metakasse
+  namespace: metakasse
+  annotations:
+    cert-manager.io/cluster-issuer: le-prod
+    haproxy.org/auth-type: basic-auth
+    haproxy.org/auth-secret: metakasse/metakasse-basic-auth
+    haproxy.org/auth-realm: "Metakasse"
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: "metakasse.lab.weltraumpflege.org"
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: metakasse
+                port:
+                  name: web
+            pathType: Prefix
+  tls:
+    - hosts:
+        - "metakasse.lab.weltraumpflege.org"
+      secretName: metakasse-tls

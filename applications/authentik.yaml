@@ -19,7 +19,7 @@ spec:
         recurse: true
 
     - repoURL: "https://charts.goauthentik.io"
-      targetRevision: 2026.8.5
+      targetRevision: 2026.8.6
       chart: "authentik"
       helm:
         values: |
@@ -81,6 +81,7 @@ spec:
               - mountPath: "/media"
                 name: media
             ingress:
+              ingressClassName: haproxy
               enabled: true
               hosts:
                 - auth.openlab-augsburg.de
