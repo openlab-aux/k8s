@@ -7,19 +7,24 @@ spec:
   destination:
     namespace: ingress-haproxy
     server: "https://kubernetes.default.svc"
-  source:
-    repoURL: "https://haproxytech.github.io/helm-charts"
-    targetRevision: 1.57.1
-    chart: kubernetes-ingress
-    helm:
-      values: |
-        controller:
-          replicaCount: 1
-          ingressClassResource:
-            name: haproxy
-            default: true
-          service:
-            type: NodePort
-            nodePorts:
-              http: 32080
-              https: 32443
+  sources:
+    - repoURL: "https://haproxytech.github.io/helm-charts"
+      targetRevision: 1.57.1
+      chart: kubernetes-ingress
+      helm:
+        values: |
+          controller:
+            replicaCount: 1
+            ingressClassResource:
+              name: haproxy
+              default: true
+            service:
+              type: NodePort
+              nodePorts:
+                http: 32080
+                https: 32443
+    - path: "manifests/haproxy"
+      repoURL: "https://github.com/openlab-aux/k8s"
+      targetRevision: main
+      directory:
+        recurse: true

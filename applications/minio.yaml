@@ -27,14 +27,8 @@ spec:
               host: minio.lab.weltraumpflege.org
               annotations:
                 cert-manager.io/cluster-issuer: le-prod
-                nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
-                nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-                nginx.ingress.kubernetes.io/rewrite-target: /
-                nginx.ingress.kubernetes.io/proxy-body-size: "0"
-                nginx.ingress.kubernetes.io/server-snippet: |
-                  client_max_body_size 0;
-                nginx.ingress.kubernetes.io/configuration-snippet: |
-                  chunked_transfer_encoding off;
+                haproxy.org/server-ssl: "true"
+                haproxy.org/path-rewrite: /
               tls:
                 - hosts:
                     - minio.lab.weltraumpflege.org
@@ -45,20 +39,14 @@ spec:
               host: console.minio.lab.weltraumpflege.org
               annotations:
                 cert-manager.io/cluster-issuer: le-prod
-                nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
-                nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-                nginx.ingress.kubernetes.io/rewrite-target: /
-                nginx.ingress.kubernetes.io/proxy-body-size: "0"
-                nginx.ingress.kubernetes.io/server-snippet: |
-                  client_max_body_size 0;
-                nginx.ingress.kubernetes.io/configuration-snippet: |
-                  chunked_transfer_encoding off;
+                haproxy.org/server-ssl: "true"
+                haproxy.org/path-rewrite: /
 
               tls:
                 - hosts:
                     - console.minio.lab.weltraumpflege.org
                   secretName: minio-console-cert
-              
+
 
           tenant:
             name: openlab

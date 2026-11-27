@@ -4,7 +4,7 @@ metadata:
   name: api
   annotations:
     cert-manager.io/cluster-issuer: le-prod
-    nginx.ingress.kubernetes.io/rewrite-target:  /api/api.json
+    haproxy.org/path-rewrite: /api/api.json
 spec:
   ingressClassName: haproxy
   rules:

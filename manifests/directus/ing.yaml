@@ -6,7 +6,6 @@ metadata:
     app: directus
   annotations:
     cert-manager.io/cluster-issuer: "le-prod"
-    nginx.ingress.kubernetes.io/proxy-body-size: 32m
 spec:
   ingressClassName: haproxy
   tls:

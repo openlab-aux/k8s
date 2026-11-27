@@ -1,0 +1,8 @@
+apiVersion: ingress.v1.haproxy.org/v1
+kind: Global
+metadata:
+  name: haproxy-global
+  namespace: haproxy-controller
+spec:
+  config:
+    ssl_server_verify: none
