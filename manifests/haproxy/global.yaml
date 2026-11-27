@@ -1,4 +1,4 @@
-apiVersion: ingress.v1.haproxy.org/v1
+apiVersion: ingress.v3.haproxy.org/v3
 kind: Global
 metadata:
   name: haproxy-global
