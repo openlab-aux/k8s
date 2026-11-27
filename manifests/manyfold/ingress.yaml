@@ -4,7 +4,6 @@ metadata:
   name: manyfold
   annotations:
     cert-manager.io/cluster-issuer: le-prod
-    nginx.ingress.kubernetes.io/proxy-body-size: 50m
 spec:
   ingressClassName: nginx
   tls:
